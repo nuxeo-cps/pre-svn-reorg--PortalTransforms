@@ -6,7 +6,8 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- Removing a the application/excel erroneous mime-type that creeps in without
+  anybody knowing why
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

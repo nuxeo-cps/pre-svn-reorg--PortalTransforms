@@ -6,6 +6,7 @@ from Globals import package_home
 from OFS.ObjectManager import BadRequestException
 
 from Products.PortalTransforms import pt_globals, skins_dir
+from Products.PortalTransforms.MimeTypeItem import MimeTypeItem
 
 
 def install(self):
@@ -44,3 +45,10 @@ def install(self):
                         path.append(productSkinName)
                 path = ','.join(path)
                 skinstool.addSkinSelection(skinName, path)
+
+    # application/excel   	application/excel  	xls
+    registry = getToolByName(self, 'mimetypes_registry')
+    registry.unregister(MimeTypeItem("Erroneous mimetype",
+                                     ('application/excel',),
+                                     ('xls',)),
+                        )
