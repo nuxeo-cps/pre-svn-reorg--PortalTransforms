@@ -8,7 +8,7 @@ Standards-Version: 3.6.1
 Package: zope-cmftransforms
 Architecture: all
 Depends: zope, lynx, pdftohtml, python-docutils
-Suggests: wv, xsltproc, tidy, unrtf, ppthtml, xlhtml, gs-common
+Suggests: wv, xsltproc, tidy, unrtf, ppthtml, xlhtml, gs-common, abiword|abiword-gnome
 Description: MIME types based transformations for the CMF
  This package provides two new CMF tools in order to
  make MIME types based transformations on the portal contents and so an
