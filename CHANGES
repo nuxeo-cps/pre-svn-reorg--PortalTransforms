@@ -6,8 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
-- Do not let DocBook XSL put style or hardcoded HTML "type" information on
-  lists. We prefer to use the portal CSS.
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

@@ -1,4 +1,21 @@
 *******************************************
+** PortalTransforms V0.3.16 [R1 build 2005/01/20-11:52 by ben]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Do not let DocBook XSL put style or hardcoded HTML "type" information on
+  lists. We prefer to use the portal CSS.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** PortalTransforms V0.3.15 [R1 build 2004/12/21-15:08 by madarche]
 
 Requires:
