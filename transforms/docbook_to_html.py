@@ -28,8 +28,20 @@ class docbook_to_html(commandtransform):
         kwargs['filename'] = basename((kwargs.get('filename') or 'unknown.docb.xml'))
 
         tmpdir, fullname = self.initialize_tmpdir(data, **kwargs)
+
+        subfiles_dict = kwargs.get('subobjects', {})
+        for k, v in subfiles_dict.items():
+            subfile_name = k
+            tmp_image_dir_path = os.path.join(tmpdir, 'images')
+            if not os.path.exists(tmp_image_dir_path):
+                os.mkdir(tmp_image_dir_path)
+            subfile_path = os.path.join(tmp_image_dir_path, subfile_name)
+            subfile = open(subfile_path, 'w+c')
+            subfile.write(str(v))
+
         html = self.invokeCommand(tmpdir, fullname)
-        path, images = self.subObjects(tmpdir)
+        html = html.replace('img src="images/', 'img src="')
+        path, images = self.subObjects(os.path.join(tmpdir, 'images'))
         objects = {}
         if images:
             self.fixImages(path, images, objects)
