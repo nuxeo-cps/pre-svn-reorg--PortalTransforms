@@ -56,8 +56,11 @@ class docbook_to_html(commandtransform):
         return cache
 
     def invokeCommand(self, tmpdir, fullname):
-        cmd = ('cd "%s" && %s --novalid  --stringparam section.autolabel "1" %s %s >"%s.html" '
-            '2>"%s.log-xsltproc"') % (
+        cmd = ('cd "%s" && %s --novalid '
+               '--stringparam section.autolabel 1 '
+               '--stringparam suppress.navigation 1 '
+               '%s %s >"%s.html" '
+               '2>"%s.log-xsltproc"') % (
             tmpdir, self.binary, XSL_STYLESHEET, fullname, sansext(fullname),
             sansext(fullname))
         LOG(self.__name__, DEBUG, "cmd = %s" % cmd)
