@@ -6,7 +6,9 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- In the sx2ml transform commented the treatment of "svg:width" and "svg:height"
+  because it doesn't work, so that images are not generated with a wrong "NaN"
+  width and height.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

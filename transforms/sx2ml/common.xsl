@@ -744,6 +744,7 @@
         <xsl:if test="$outputType = 'CSS_HEADER' or $outputType = 'CSS_INLINED'">
 
             <xsl:element name="img">
+        <!-- 
                 <xsl:if test="@svg:width">
                     <xsl:attribute name="width">
                         <xsl:call-template name="convert2pixel">
@@ -758,7 +759,8 @@
                         </xsl:call-template>
                     </xsl:attribute>
                 </xsl:if>
-                <xsl:choose>
+        -->
+                 <xsl:choose>
                      <!-- for images jared in open office document -->
                     <xsl:when test="contains(@xlink:href, '#Pictures/')">
                         <!-- creating an absolute http URL to the packed image file -->
