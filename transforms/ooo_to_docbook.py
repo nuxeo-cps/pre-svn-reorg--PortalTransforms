@@ -12,12 +12,12 @@ from zLOG import LOG, DEBUG, WARNING
 class ooo_to_docbook(commandtransform):
     __implements__ = itransform
 
-    __name__ = "ooo_to_docbook"
+    __name__ = 'ooo_to_docbook'
     inputs   = ('application/vnd.sun.xml.writer',)
     output  = 'application/docbook+xml'
 
     binaryName = os.path.join(
-        os.getcwd(), os.path.dirname(__file__), './ooo2dbk/ooo2dbk.py')
+        os.getcwd(), os.path.dirname(__file__), 'ooo2dbk', 'ooo2dbk.py')
 
     def __init__(self):
         commandtransform.__init__(self, binary=self.binaryName)
@@ -27,10 +27,15 @@ class ooo_to_docbook(commandtransform):
 
         tmpdir, fullname = self.initialize_tmpdir(data, **kwargs)
         generated_file_data = self.invokeCommand(tmpdir, fullname)
-        path, images = self.subObjects(os.path.join(tmpdir, 'images'))
-        objects = {}
-        if images:
-            self.fixImages(path, images, objects)
+
+        subObjectsPaths = [tmpdir, os.path.join(tmpdir, 'images')]
+        for subObjectsPath in subObjectsPaths:
+            if os.path.exists(subObjectsPath):
+                path, images = self.subObjects(subObjectsPath)
+                objects = {}
+                if images:
+                    self.fixImages(path, images, objects)
+
         self.cleanDir(tmpdir)
         cache.setData(generated_file_data)
         cache.setSubObjects(objects)
@@ -43,12 +48,13 @@ class ooo_to_docbook(commandtransform):
         LOG(self.__name__, DEBUG, "cmd = %s" % cmd)
         os.system(cmd)
         try:
-            generated_file = open("%s/%s.docb" % (tmpdir, sansext(fullname)), 'r')
+            generated_file = open(os.path.join(tmpdir, "%s.docb.xml" % sansext(fullname)),
+                            'r')
             generated_file_data = generated_file.read()
             generated_file.close()
         except:
             try:
-                return open("%s/error_log" % tmpdir, 'r').read()
+                return open(os.path.join(tmpdir, 'error_log'), 'r').read()
             except:
                 return ''
         return generated_file_data

@@ -21,7 +21,7 @@ from os.path import basename
 class word_to_html:
     __implements__ = itransform
 
-    __name__ = "word_to_html"
+    __name__ = 'word_to_html'
     inputs   = ('application/msword',)
     output  = 'text/html'
 
