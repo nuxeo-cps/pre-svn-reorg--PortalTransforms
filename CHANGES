@@ -4,6 +4,9 @@ Requires:
 New features:
 ~~~~~~~~~~~~~
 - Adding the 'application/docbook+xml' official mime type
+- Adding the docbook_to_html transform
+- Adding the ooo_to_docbook transform
+
 Bug fixes:
 ~~~~~~~~~~
 - Fill in cps_suffix_map to differentiate a double extension containing xml.

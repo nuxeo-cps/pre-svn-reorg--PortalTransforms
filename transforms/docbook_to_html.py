@@ -1,0 +1,60 @@
+"""
+Transform DocBook XML to HTML through XSL
+"""
+# $Id$
+
+from Products.PortalTransforms.interfaces import itransform
+from Products.PortalTransforms.libtransforms.utils import bin_search, basename, sansext
+from Products.PortalTransforms.libtransforms.commandtransform import commandtransform
+import os
+from zLOG import LOG, DEBUG, WARNING
+
+XSL_STYLESHEET = os.path.join(
+    os.getcwd(), os.path.dirname(__file__), './docbook/xhtml/docbook.xsl')
+
+class docbook_to_html(commandtransform):
+    __implements__ = itransform
+
+    __name__ = "docbook_to_html"
+    inputs   = ('application/docbook+xml',)
+    output  = 'text/html'
+
+    binaryName = "xsltproc"
+
+    def __init__(self):
+        commandtransform.__init__(self, binary=self.binaryName)
+
+    def convert(self, data, cache, **kwargs):
+        kwargs['filename'] = basename((kwargs.get('filename') or 'unknown.docb.xml'))
+
+        tmpdir, fullname = self.initialize_tmpdir(data, **kwargs)
+        html = self.invokeCommand(tmpdir, fullname)
+        path, images = self.subObjects(tmpdir)
+        objects = {}
+        if images:
+            self.fixImages(path, images, objects)
+        self.cleanDir(tmpdir)
+        cache.setData(html)
+        cache.setSubObjects(objects)
+        return cache
+
+    def invokeCommand(self, tmpdir, fullname):
+        cmd = ('cd "%s" && %s --novalid %s %s >"%s.html" '
+            '2>"%s.log-xsltproc"') % (
+            tmpdir, self.binary, XSL_STYLESHEET, fullname, sansext(fullname),
+            sansext(fullname))
+        LOG(self.__name__, DEBUG, "cmd = %s" % cmd)
+        os.system(cmd)
+        try:
+            htmlfile = open("%s/%s.html" % (tmpdir, sansext(fullname)), 'r')
+            html = htmlfile.read()
+            htmlfile.close()
+        except:
+            try:
+                return open("%s/error_log" % tmpdir, 'r').read()
+            except:
+                return ''
+        return html
+
+def register():
+    return docbook_to_html()
