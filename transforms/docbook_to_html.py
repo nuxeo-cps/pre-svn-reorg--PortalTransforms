@@ -50,7 +50,7 @@ class docbook_to_html(commandtransform):
         objects = {}
         if images:
             self.fixImages(path, images, objects)
-        #self.cleanDir(tmpdir)
+        self.cleanDir(tmpdir)
         cache.setData(html)
         cache.setSubObjects(objects)
         return cache
