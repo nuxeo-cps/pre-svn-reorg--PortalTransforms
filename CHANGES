@@ -3,10 +3,12 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- For docbook_to_html transform dumping potential subobjects first on the tmpdir
+  before launching the transformation thus making it possible to have images in
+  the html conversion
 Bug fixes:
 ~~~~~~~~~~
--
+- For OO.o transforms specifying where the subobjects (images) are to be found
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
