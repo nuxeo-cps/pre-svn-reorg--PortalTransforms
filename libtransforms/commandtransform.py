@@ -5,7 +5,7 @@ import shutil
 from os.path import join, basename
 
 from Products.PortalTransforms.interfaces import itransform
-from utils import bin_search, sansext
+from utils import bin_search
 
 class commandtransform:
     """abstract class for external command based transform
