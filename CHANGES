@@ -6,12 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
-- Made the transforms look for sub-objects in a sub-directory only if such a
-  sub-directory exists. The previous implementation had the effect that only
-  transforms which had files with images in sub-directories could work.
-- Disabled in ooo2sdbk.xsl the management of measure units for images because it
-  produced inch in DocBook and it was not useful anyway as of now
-
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
