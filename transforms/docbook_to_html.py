@@ -41,7 +41,12 @@ class docbook_to_html(commandtransform):
 
         html = self.invokeCommand(tmpdir, fullname)
         html = html.replace('img src="images/', 'img src="')
-        path, images = self.subObjects(os.path.join(tmpdir, 'images'))
+        try:
+            path, images = self.subObjects(os.path.join(tmpdir,
+                                                        'images'))
+        except OSError, e:
+            LOG('docbook_to_html.convert', WARNING, 'OSError: %s' % e)
+            path, images = '', []
         objects = {}
         if images:
             self.fixImages(path, images, objects)
