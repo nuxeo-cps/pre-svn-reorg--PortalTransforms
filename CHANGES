@@ -6,7 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- Fix problem in docbook to html conversion when there are no subimages.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
