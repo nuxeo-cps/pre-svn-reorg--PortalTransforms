@@ -17,7 +17,7 @@ class ooo_to_docbook(commandtransform):
     output  = 'application/docbook+xml'
 
     binaryName = os.path.join(
-        os.getcwd(), os.path.dirname(__file__), 'ooo2dbk', 'ooo2dbk.py')
+        os.getcwd(), os.path.dirname(__file__), 'ooo2dbk', 'ooo2dbk')
 
     def __init__(self):
         commandtransform.__init__(self, binary=self.binaryName)
