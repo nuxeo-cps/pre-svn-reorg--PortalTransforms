@@ -4,6 +4,8 @@ Requires:
 New features:
 ~~~~~~~~~~~~~
 - Adding the 'application/docbook+xml' official mime type
+- Adding OOo2sDBK tool
+- Adding DocBook XSL transforms
 - Adding the docbook_to_html transform
 - Adding the ooo_to_docbook transform
 
