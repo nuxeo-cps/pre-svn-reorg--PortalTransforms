@@ -6,7 +6,8 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- .gz, .tar and .tar.gz DON'T use the same mimetype; almost completely rewrote
+  lookupExtension and cleaned it like upstream authors did.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

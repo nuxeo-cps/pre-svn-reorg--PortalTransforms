@@ -21,6 +21,15 @@ suffix_map = {
     'tz': '.tar.gz',
     }
 
+# XXX Added by Nuxeo for the sake of .tar.gz files.
+# Mapping of suffixes generally used after the suffix in value.
+cps_suffix_map = {
+    'gz': ('tar',),
+    'bz2': ('tar',),
+    'Z': ('pcf',),
+}
+
+# XXX Unused after Nuxeo cleaning but also in PortalTransform 1.0.4 and above
 encodings_map = {
     'gz': 'gzip',
     'Z': 'compress',
@@ -143,21 +152,32 @@ class MimeTypesRegistry(Base):
 
         Return an imimetype object associated with the file's
         extension or None
+
+        XXX Changed by Nuxeo for types like tar.gz, which is different from a
+        plain tar file and is not just a gzip'ed file; even the Mimetype tool
+        makes a difference between x-tar files and x-gtar files.
+        Combinations not in 'cps_suffix_map' are considered to be nothing but
+        gzip'ed files (for instance) using the same mimetype.
         """
         if filename.find('.') != -1:
             base, ext = splitext(filename)
             ext = ext[1:] # remove the dot
-            while self.suffix_map.has_key(ext):
-                base, ext = splitext(base + self.suffix_map[ext])
-                ext = ext[1:] # remove the dot
+            while cps_suffix_map.has_key(ext):
+                base, prevext = splitext(base)
+                if not prevext:
+                    break
+                prevext = prevext[1:] # remove the dot
+                if prevext in cps_suffix_map[ext]:
+                    # both extensions mean something else than a single one
+                    ext = '%s.%s' % (prevext, ext)
+                else:
+                    # this previous suffix don't map to a different mimetype
+                    # but this is supposed to be more specific.
+                    ext = prevext
         else:
             ext = filename
-        if self.encodings_map.has_key(ext):
-            encoding = self.encodings_map[ext]
-            base, ext = splitext(base)
-            ext = ext[1:] # remove the dot
-        else:
-            encoding = None
+        # XXX Nuxeo: the rest of that method was removed in version 1.0.4
+        # and above
         return self.extensions.get(ext)
 
     def _classifiers(self):
