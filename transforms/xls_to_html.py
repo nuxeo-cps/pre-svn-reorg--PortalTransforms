@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # (C) Copyright 2004 Nuxeo SARL <http://nuxeo.com>
-# Author: Stéfane Fermigier <fg@nuxeo.com>
+# Author: Stéfane Fermigier <sf@nuxeo.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 2 as published
