@@ -28,3 +28,4 @@ coverage: cover
 
 clean:
 	rm -rf *.pyc *~ cover .coverage
+	rm -f textindexng.log

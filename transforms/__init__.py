@@ -16,6 +16,7 @@ modules = [
     'st',             # zopish
     'rest',           # docutils
     'word_to_html',   # uno, com, wvware
+    'xls_to_html',    # xlhtml
     'html_to_text',   # re based transform
     'text_to_html',   # wrap text in a verbatim env
     'pdf_to_html',    # sf.net/projects/pdftohtml

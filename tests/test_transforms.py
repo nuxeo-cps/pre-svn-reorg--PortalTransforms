@@ -78,6 +78,9 @@ TRANSFORMS_TESTINFO = (
     ('Products.PortalTransforms.transforms.text_to_html',
      "rest1.rst", "rest1.html", None, 0
      ),
+    ('Products.PortalTransforms.transforms.xls_to_html',
+     "test1.xls", "test1.html", None, 0
+     ),
     )
 
 from Products.PortalTransforms.unsafe_transforms.build_transforms import TRANSFORMS
