@@ -6,7 +6,8 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- In ooo_to_docbook, made the Bibliocoverage, Bibliosource and Bibliorelation
+  not appear in the body of the document.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
