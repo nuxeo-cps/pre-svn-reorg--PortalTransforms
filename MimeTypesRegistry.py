@@ -27,6 +27,7 @@ cps_suffix_map = {
     'gz': ('tar',),
     'bz2': ('tar',),
     'Z': ('pcf',),
+    'xml': ('doc', 'docb'),
 }
 
 # XXX Unused after Nuxeo cleaning but also in PortalTransform 1.0.4 and above
