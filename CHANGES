@@ -9,4 +9,6 @@ Bug fixes:
 -
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
--
+- For the docbook_to_html transform, all the configuration parameters are now
+  set in a custom-xhtml.xsl file instead of being passed as command line
+  arguments.

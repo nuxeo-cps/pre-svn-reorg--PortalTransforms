@@ -10,7 +10,7 @@ import os
 from zLOG import LOG, DEBUG, WARNING
 
 XSL_STYLESHEET = os.path.join(
-    os.getcwd(), os.path.dirname(__file__), './docbook/xhtml/docbook.xsl')
+    os.getcwd(), os.path.dirname(__file__), 'docbook/custom-xhtml.xsl')
 
 class docbook_to_html(commandtransform):
     __implements__ = itransform
@@ -50,19 +50,15 @@ class docbook_to_html(commandtransform):
         objects = {}
         if images:
             self.fixImages(path, images, objects)
-        self.cleanDir(tmpdir)
+        #self.cleanDir(tmpdir)
         cache.setData(html)
         cache.setSubObjects(objects)
         return cache
 
     def invokeCommand(self, tmpdir, fullname):
-        cmd = ('cd "%s" && %s --novalid '
-               '--stringparam section.autolabel 1 '
-               '--stringparam suppress.navigation 1 '
-               '%s %s >"%s.html" '
-               '2>"%s.log-xsltproc"') % (
-            tmpdir, self.binary, XSL_STYLESHEET, fullname, sansext(fullname),
-            sansext(fullname))
+        cmd = ('cd "%s" && %s --novalid %s %s >"%s.html" 2>"%s.log-xsltproc"'
+               % (tmpdir, self.binary, XSL_STYLESHEET, fullname,
+                  sansext(fullname), sansext(fullname)))
         LOG(self.__name__, DEBUG, "cmd = %s" % cmd)
         os.system(cmd)
         try:
