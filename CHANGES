@@ -3,7 +3,8 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- Added support for more DocBook tags and various other improvements (appendix
+  support, figure number fix, etc.)
 Bug fixes:
 ~~~~~~~~~~
 - In the sx2ml transform commented the treatment of "svg:width" and "svg:height"
