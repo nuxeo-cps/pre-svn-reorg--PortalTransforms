@@ -38,7 +38,6 @@ class pdf_to_text(commandtransform):
         textfile = "%s/%s.txt" % (tmpdir, sansext(fullname))
         cmd = 'cd "%s" && %s "%s" "%s" 2>error_log 1>/dev/null' % (
             tmpdir, self.binary, fullname, textfile)
-        print cmd
         system(cmd)
         try:
             text = open(textfile).read()
