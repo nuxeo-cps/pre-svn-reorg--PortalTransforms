@@ -1,4 +1,22 @@
 *******************************************
+** PortalTransforms V0.3.2 [R1 build 2004/06/25-14:19 by madarche]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Adding support for more DocBook element such as bibliocoverage, bibliosource,
+  bibliorelation, etc. and file renaming to reflect the fact that it's not
+  dealing with simplified DocBook anymore, but with DocBook.
+Bug fixes:
+~~~~~~~~~~
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** PortalTransforms V0.3.1 [R1 build 2004/06/18-16:43 by madarche]
 
 Requires:
