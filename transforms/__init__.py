@@ -12,6 +12,10 @@
 ###    should raise an ImportError as well (dumb, I know)
 
 from Products.PortalTransforms.libtransforms.utils import MissingBinary
+from zLOG import LOG, DEBUG, WARNING
+
+logKey = 'PortalTransforms'
+
 modules = [
     'st',             # zopish
     'rest',           # docutils
@@ -19,6 +23,8 @@ modules = [
     'xls_to_html',    # xlhtml
     'ppt_to_html',    # ppthtml
     'ooo_to_html',    # unzip + xsltproc
+    'ooo_to_docbook', # OOo2sDBK http://www.chez.com/ebellot/ooo2sdbk/
+    'docbook_to_html',# xsltproc + http://docbook.sourceforge.net/
     'text_to_html',   # wrap text in a verbatim env
     'pdf_to_html',    # sf.net/projects/pdftohtml
     'pdf_to_text',    # www.foolabs.com/xpdf
@@ -34,13 +40,18 @@ g = globals()
 transforms = []
 for m in modules:
     try:
+        LOG(logKey, DEBUG, "Importing module = %s" % m)
         ns = __import__(m, g, g, None)
+        LOG(logKey, DEBUG, "Appending transform = %s" % ns)
         transforms.append(ns.register())
     except ImportError, e:
+        LOG(logKey, WARNING, "Problem importing module %s : %s" % (m, e))
         print "Problem importing module %s : %s" % (m, e)
     except MissingBinary, e:
+        LOG(logKey, WARNING, "MissingBinary = %s" % e)
         print e
     except:
+        LOG(logKey, WARNING, "Unknow error")
         import traceback
         traceback.print_exc()
 
