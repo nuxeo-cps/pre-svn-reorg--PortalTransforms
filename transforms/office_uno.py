@@ -1,7 +1,8 @@
 import re, os, tempfile
 from uno import uno
 from Products.PortalTransforms.libtransforms.utils import scrubHTML, bodyfinder
-import commandtransform
+from Products.PortalTransforms.libtransforms.commandtransform \
+    import commandtransform
 
 class document(commandtransform):
 

@@ -1,13 +1,9 @@
-import win32com, sys, string, win32api, traceback, re, tempfile, os
-import win32com.client
-from win32com.test.util import CheckClean
+import win32api
 import pythoncom
-from win32com.client import gencache
 from win32com.client import constants, Dispatch
-from pywintypes import Unicode
-import os.path
 
-from Products.PortalTransforms.libtransforms.commandtransform import commandtransform
+from Products.PortalTransforms.libtransforms.commandtransform \
+    import commandtransform
 from Products.PortalTransforms.libtransforms.utils import bodyfinder, scrubHTML
 
 class document(commandtransform):
@@ -18,7 +14,7 @@ class document(commandtransform):
         commandtransform.__init__(self, name)
         name = self.name()
         if not name.endswith('.doc'):
-            name = name + ".doc"
+            name += ".doc"
         self.tmpdir, self.fullname = self.initialize_tmpdir(data, filename=name)
 
     def convert(self):
@@ -37,8 +33,8 @@ class document(commandtransform):
             word.ActiveDocument.WebOptions.RelyOnVML = 0
             word.ActiveDocument.WebOptions.AllowPNG = 1
             #And then save the document into HTML
-            doc.SaveAs(FileName = "%s.htm" % (self.fullname),
-                       FileFormat = constants.wdFormatHTML)
+            doc.SaveAs(FileName="%s.htm" % (self.fullname),
+                       FileFormat=constants.wdFormatHTML)
 
             #TODO -- Extract Metadata (author, title, keywords) so we
             #can populate the dublin core
