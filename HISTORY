@@ -1,4 +1,21 @@
 *******************************************
+** PortalTransforms V0.3.4 [R1 build 2004/08/13-15:33 by madarche]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Removed doc files and transforms from docbook to javahelp and htmlhelp to not
+  waste too much space.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** PortalTransforms V0.3.3 [R1 build 2004/07/30-10:06 by ben]
 
 Requires:

@@ -6,8 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
-- Removed doc files and transforms from docbook to javahelp and htmlhelp to not
-  waste too much space.
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
