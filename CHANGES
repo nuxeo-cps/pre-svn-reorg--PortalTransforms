@@ -3,10 +3,10 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- Handling of the Remark OOo style and the remark DocBook element.
 Bug fixes:
 ~~~~~~~~~~
--
+- Made Keywordset not appear outside the metadata.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
