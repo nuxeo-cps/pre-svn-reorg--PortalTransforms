@@ -6,10 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
-- .gz, .tar and .tar.gz DON'T use the same mimetype; almost completely rewrote
-  lookupExtension and cleaned it like upstream authors did.
-- Also changed MimeTypesTool to also have .tar.gz for application/x-gtar.
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
-- Taught the unit test the difference between a plain tar file and a gzip'ed tar
-  file.
+-

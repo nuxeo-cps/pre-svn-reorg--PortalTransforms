@@ -1,4 +1,23 @@
 *******************************************
+** PortalTransforms V0.1.4 [R1 build 2004/06/04-15:35 by hcauwelier]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- .gz, .tar and .tar.gz DON'T use the same mimetype; almost completely rewrote
+  lookupExtension and cleaned it like upstream authors did.
+- Also changed MimeTypesTool to also have .tar.gz for application/x-gtar.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Taught the unit test the difference between a plain tar file and a gzip'ed tar
+  file.
+
+*******************************************
 ** PortalTransforms V0.1.3 [R1 build 2004/05/26-13:10 by madarche]
 
 Requires:
