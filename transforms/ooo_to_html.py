@@ -46,6 +46,7 @@ class ooo_to_html(commandtransform):
         cmd = ('cd "%s" && xsltproc --novalid %s content.xml >"%s.html" '
             '2>"%s.log-xsltproc"') % (
             tmpdir, XSL_STYLESHEET, sansext(fullname), sansext(fullname))
+        LOG(self.__name__, DEBUG, "cmd = %s" % cmd)
         os.system(cmd)
         try:
             htmlfile = open(os.path.join(tmpdir, "%s.html" % sansext(fullname)),
