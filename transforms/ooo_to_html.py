@@ -17,7 +17,7 @@ class ooo_to_html(commandtransform):
 
     __name__ = 'ooo_to_html'
     inputs = ('application/vnd.sun.xml.writer',
-              'application/vnd.sun.xml.impress', 
+              'application/vnd.sun.xml.impress',
               'application/vnd.sun.xml.calc')
     output = 'text/html'
 
