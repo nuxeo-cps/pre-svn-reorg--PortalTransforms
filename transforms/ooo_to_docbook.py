@@ -42,7 +42,7 @@ class ooo_to_docbook(commandtransform):
         return cache
 
     def invokeCommand(self, tmpdir, fullname):
-        cmd = ('cd "%s" && %s --dbkfile %s.docb %s '
+        cmd = ('cd "%s" && %s --dbkfile %s.docb.xml %s '
             '2>"%s.log-xsltproc"') % (
             tmpdir, self.binary, sansext(fullname), fullname, sansext(fullname))
         LOG(self.__name__, DEBUG, "cmd = %s" % cmd)
