@@ -192,8 +192,8 @@ class MimeTypesRegistry(Base):
            the mimetype
         3) we can optionally introspect the data
         4) default to self.defaultMimetype if no data was provided
-           else to application/octet-stream of no filename was provided,
-           else to text/plain
+           else to application/octet-stream if no filename was provided,
+           else to None
 
         Return an imimetype object
         """
@@ -212,18 +212,21 @@ class MimeTypesRegistry(Base):
             if not mt:
                 mstr = magic.guessMime(data)
                 if mstr:
-                    mt = self.lookup(mstr)[0]
+                    mt = self.lookup(mstr)
+                    if mt:
+                        mt = mt[0]
         if not mt:
             if not data:
                 mt = self.lookup(self.defaultMimetype)[0]
             elif filename:
                 mt = self.lookup('application/octet-stream')[0]
             else:
-                mt = self.lookup('text/plain')[0]
-        # Remove acquisition wrappers
-        mt = aq_base(mt)
-        # Copy by pickle, to remove connection references
-        mt = loads(dumps(mt))
+                mt = None
+        if mt:
+            # Remove acquisition wrappers
+            mt = aq_base(mt)
+            # Copy by pickle, to remove connection references
+            mt = loads(dumps(mt))
         return mt
 
     def __call__(self, data, **kwargs):
@@ -251,7 +254,7 @@ class MimeTypesRegistry(Base):
         # it is
         mt = self.classify(data, mimetype=mimetype, filename=filename)
 
-        if not mt.binary and not type(data) is UnicodeType:
+        if mt and not mt.binary and not type(data) is UnicodeType:
             # if no encoding specified, try to guess it from data
             if encoding is None:
                 encoding = self.guess_encoding(data)
