@@ -595,7 +595,7 @@
     <xsl:call-template name="simple.xlink">
       <xsl:with-param name="content">
         <xsl:choose>
-          <xsl:when test="@role = 'bold'">
+          <xsl:when test="@role = 'strong' or @role = 'bold'">
             <!-- backwards compatibility: make bold into b elements, but -->
             <!-- don't put bold inside figure, example, or table titles -->
             <xsl:choose>
@@ -603,7 +603,7 @@
                 <xsl:apply-templates/>
               </xsl:when>
               <xsl:otherwise>
-                <b><xsl:apply-templates/></b>
+                <strong><xsl:apply-templates/></strong>
               </xsl:otherwise>
             </xsl:choose>
           </xsl:when>

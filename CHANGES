@@ -6,7 +6,8 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- Bugfix on the DocBook XSL stylesheets for the emphasis element, so that role
+  "strong" is truly taken into account.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
