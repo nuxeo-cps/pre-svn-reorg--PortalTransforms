@@ -3,7 +3,9 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- Adding support for more DocBook element such as bibliocoverage, bibliosource,
+  bibliorelation, etc. and file renaming to reflect the fact that it's not
+  dealing with simplified DocBook anymore, but with DocBook.
 Bug fixes:
 ~~~~~~~~~~
 -
