@@ -21,5 +21,5 @@ def initialize(context):
     from Products.CMFCore import utils
     utils.ToolInit("%s Tool" % PKG_NAME, tools=tools,
                    product_name=PKG_NAME,
-                   icon="tool.gif",
+                   icon="tool.png",
                    ).initialize(context)
