@@ -159,7 +159,7 @@ class MimeTypesRegistry(Base):
         Combinations not in 'cps_suffix_map' are considered to be nothing but
         gzip'ed files (for instance) using the same mimetype.
         """
-        if filename.find('.') != -1:
+        if filename.rfind('.') != -1:
             base, ext = splitext(filename)
             ext = ext[1:] # remove the dot
             while cps_suffix_map.has_key(ext):

@@ -61,10 +61,10 @@ class TestMimeTypes(TestCase):
         self.failUnless(isinstance(mt, application_octet_stream), str(mt))
 
         mt = reg.classify(data, filename="test.tgz")
-        self.failUnlessEqual(str(mt), 'application/x-tar')
+        self.failUnlessEqual(str(mt), 'application/x-gtar')
 
         mt = reg.classify(data, filename="test.tar.gz")
-        self.failUnlessEqual(str(mt), 'application/x-tar')
+        self.failUnlessEqual(str(mt), 'application/x-gtar')
 
         mt = reg.classify(data, filename="test.pdf.gz")
         self.failUnlessEqual(str(mt), 'application/pdf')

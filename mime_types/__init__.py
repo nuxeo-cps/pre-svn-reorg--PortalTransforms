@@ -110,6 +110,13 @@ class application_octet_stream(MimeTypeItem):
     binary     = 1
     extensions = ()
 
+class application_x_gtar(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "application/x-gtar"
+    mimetypes = ('application/x-gtar',)
+    binary     = 1
+    extensions = ('tar.gz',)
+
 # TODO: this list should be automagically computed ising introspection.
 reg_types = [
     text_plain,
@@ -125,7 +132,8 @@ reg_types = [
     text_python,
     application_octet_stream,
     application_rtf,
-    ]
+    application_x_gtar,
+]
 
 import mimetypes as pymimetypes
 
