@@ -17,6 +17,7 @@ modules = [
     'rest',           # docutils
     'word_to_html',   # uno, com, wvware
     'xls_to_html',    # xlhtml
+    'ppt_to_html',    # ppthtml
     'ooo_to_html',    # unzip + xsltproc
     'text_to_html',   # wrap text in a verbatim env
     'pdf_to_html',    # sf.net/projects/pdftohtml

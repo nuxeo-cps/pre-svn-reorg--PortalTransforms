@@ -81,6 +81,9 @@ TRANSFORMS_TESTINFO = (
     ('Products.PortalTransforms.transforms.xls_to_html',
      "test_excel.xls", "test_excel.html", None, 0
      ),
+    ('Products.PortalTransforms.transforms.ppt_to_html',
+     "test_powerpoint.ppt", "test_powerpoint.html", None, 0
+     ),
     ('Products.PortalTransforms.transforms.ooo_to_html',
      "test_writer.sxw", "test_writer.html", None, 0
      ),

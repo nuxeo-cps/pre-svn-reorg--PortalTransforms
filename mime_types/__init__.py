@@ -60,6 +60,13 @@ class application_msexcel(MimeTypeItem):
     extensions = ('xls',)
     binary     = 1
 
+class application_mspowerpoint(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "Microsoft PowerPoint Document"
+    mimetypes  = ('application/vnd.ms-powerpoint',)
+    extensions = ('ppt',)
+    binary     = 1
+
 class application_writer(MimeTypeItem):
     __implements__ = MimeTypeItem.__implements__
     __name__   = "OpenOffice.org Writer Document"
@@ -108,6 +115,7 @@ reg_types = [
     text_plain,
     application_msword,
     application_msexcel,
+    application_mspowerpoint,
     application_writer,
     application_impress,
     application_calc,
