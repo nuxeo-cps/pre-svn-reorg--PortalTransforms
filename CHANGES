@@ -6,8 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
-- Renamed "ooo2dbk.py" into "ooo2dbk" as a standalone script should not have any
-  suffix.
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
-- Using new ooo2dbk
+-

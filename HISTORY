@@ -1,4 +1,21 @@
 *******************************************
+** PortalTransforms V0.3.14 [R1 build 2004/12/13-09:16 by madarche]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Renamed "ooo2dbk.py" into "ooo2dbk" as a standalone script should not have any
+  suffix.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Using new ooo2dbk
+
+*******************************************
 ** PortalTransforms V0.3.13 [R1 build 2004/12/01-10:30 by madarche]
 
 Requires:
