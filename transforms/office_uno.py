@@ -1,8 +1,9 @@
 import re, os, tempfile
 from uno import uno
 from Products.PortalTransforms.libtransforms.utils import scrubHTML, bodyfinder
+import commandtransform
 
-class document:
+class document(commandtransform):
 
     def __init__(self, name, data):
         """Initialization: create tmp work directory and copy the
@@ -10,7 +11,7 @@ class document:
         commandtransform.__init__(self, name)
         name = self.name()
         if not name.endswith('.doc'):
-            name = name + ".doc"
+            name += ".doc"
         self.tmpdir, self.fullname = self.initialize_tmpdir(data, filename=name)
 
     def convert(self):
@@ -21,11 +22,11 @@ class document:
             properties =  [ {
                'Name'  : 'Hidden',
                'Value' : rUNO.newBoolean(1)
-               }
-                            ]
+               }]
 
-            rProperties = rUNO.newPropertyValues ( properties )
-            xStorable = rUNO.new ("file://%s" % self.file, propertyValues=rProperties )[0]
+            rProperties = rUNO.newPropertyValues(properties)
+            xStorable = rUNO.new(
+                "file://%s" % self.file, propertyValues=rProperties)[0]
 
             properties = [ { 'Name' : 'FilterName',
                              'Value' : 'swriter: HTML (StarWriter)' },
@@ -33,11 +34,11 @@ class document:
                              'Value' : rUNO.newBoolean(1) }
                            ]
 
-            rProperties = rUNO.newPropertyValues ( properties )
+            rProperties = rUNO.newPropertyValues(properties)
 
-            xStorable.storeAsURL ("file://%s.html" % self.file, rProperties )
-        except Exception, E:
-            print E
+            xStorable.storeAsURL("file://%s.html" % self.file, rProperties)
+        except Exception, e:
+            print e
             pass
 
         if xStorable is not None:
