@@ -3,11 +3,10 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
-- Handling of the Remark OOo style and the remark DocBook element.
+-
 Bug fixes:
 ~~~~~~~~~~
-- Made Keywordset not appear outside the metadata.
-- Switched ooo2dbk.xsl to encoding="ISO-8859-15"
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

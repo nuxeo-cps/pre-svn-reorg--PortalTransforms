@@ -1,4 +1,21 @@
 *******************************************
+** PortalTransforms V0.3.6 [R1 build 2004/08/19-13:40 by madarche]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Handling of the Remark OOo style and the remark DocBook element.
+Bug fixes:
+~~~~~~~~~~
+- Made Keywordset not appear outside the metadata.
+- Switched ooo2dbk.xsl to encoding="ISO-8859-15"
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** PortalTransforms V0.3.5 [R1 build 2004/08/16-12:54 by madarche]
 
 Requires:
