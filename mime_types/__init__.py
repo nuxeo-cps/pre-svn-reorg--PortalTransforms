@@ -47,11 +47,17 @@ class application_rtf(MimeTypeItem):
     binary     = 1
 
 class application_msword(MimeTypeItem):
-
     __implements__ = MimeTypeItem.__implements__
-    __name__   = "Microsoft Office Document"
+    __name__   = "Microsoft Word Document"
     mimetypes  = ('application/msword',)
     extensions = ('doc',)
+    binary     = 1
+
+class application_msexcel(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "Microsoft Excel Document"
+    mimetypes  = ('application/vnd.ms-excel',)
+    extensions = ('xls',)
     binary     = 1
 
 class application_writer(MimeTypeItem):
@@ -101,6 +107,7 @@ class application_octet_stream(MimeTypeItem):
 reg_types = [
     text_plain,
     application_msword,
+    application_msexcel,
     application_writer,
     application_impress,
     application_calc,

@@ -1,3 +1,4 @@
+# -*- coding: iso-8859-1 -*-
 # (C) Copyright 2004 Nuxeo SARL <http://nuxeo.com>
 # Author: Stéfane Fermigier <fg@nuxeo.com>
 #
