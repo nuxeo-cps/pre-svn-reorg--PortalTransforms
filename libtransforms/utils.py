@@ -5,6 +5,7 @@ from sgmllib import SGMLParser
 
 
 bin_search_path = [
+    '/bin',
     '/usr/bin',
     '/usr/local/bin',
     ]
