@@ -1,4 +1,21 @@
 *******************************************
+** PortalTransforms V0.3.15 [R1 build 2004/12/21-15:08 by madarche]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Switched to DocBook XSL 1.67.2.
+Bug fixes:
+~~~~~~~~~~
+- Fixed the HTML headers going upper than h6 by switching to
+  DocBook XSL 1.67.2.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** PortalTransforms V0.3.14 [R1 build 2004/12/13-09:16 by madarche]
 
 Requires:

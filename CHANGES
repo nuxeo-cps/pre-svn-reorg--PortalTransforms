@@ -3,11 +3,10 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
-- Switched to DocBook XSL 1.67.2.
+-
 Bug fixes:
 ~~~~~~~~~~
-- Fixed the HTML headers going upper than h6 by switching to
-  DocBook XSL 1.67.2.
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
