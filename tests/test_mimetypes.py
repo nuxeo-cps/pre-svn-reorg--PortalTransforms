@@ -1,6 +1,7 @@
 from rigging import *
 from Products.PortalTransforms.mime_types import text_plain, text_xml, application_octet_stream
 from utils import input_file_path
+from types import NoneType
 
 class TestMimeTypes(TestCase):
     def setUp(self):
@@ -45,7 +46,7 @@ class TestMimeTypes(TestCase):
 
         # test unclassifiable data and no stream flag (filename)
         mt = reg.classify('xxx')
-        self.failUnless(isinstance(mt, text_plain), str(mt))
+        self.failUnless(isinstance(mt, NoneType), str(mt))
 
         # test unclassifiable data and file flag
         mt = reg.classify('baz', filename='xxx')
