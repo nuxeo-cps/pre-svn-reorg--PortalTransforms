@@ -1,5 +1,5 @@
 """
-
+Transform OOo file to HTML through XSL
 """
 from Products.PortalTransforms.interfaces import itransform
 from Products.PortalTransforms.libtransforms.utils \
@@ -7,6 +7,7 @@ from Products.PortalTransforms.libtransforms.utils \
 from Products.PortalTransforms.libtransforms.commandtransform \
     import commandtransform
 import os
+from zLOG import LOG, DEBUG, WARNING
 
 XSL_STYLESHEET = os.path.join(
   os.getcwd(), os.path.dirname(__file__), 'sx2ml', 'main_html.xsl')
