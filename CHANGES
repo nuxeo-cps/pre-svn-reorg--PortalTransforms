@@ -6,9 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
-- IndexError when mimetype is not found in MimeTypesRegistry.classify
-- mimetype was classified as text/plain when the mimetype was not known,
-  instead of defaulting to None.
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

@@ -1,4 +1,22 @@
 *******************************************
+** PortalTransforms V0.3.10 [R1 build 2004/10/14-17:05 by anahide]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- IndexError when mimetype is not found in MimeTypesRegistry.classify
+- mimetype was classified as text/plain when the mimetype was not known,
+  instead of defaulting to None.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** PortalTransforms V0.3.9 [R1 build 2004/08/27-14:00 by madarche]
 
 Requires:
