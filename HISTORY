@@ -1,4 +1,21 @@
 *******************************************
+** PortalTransforms V0.3.8 [R1 build 2004/08/27-08:53 by madarche]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- In ooo_to_docbook, made the Bibliocoverage, Bibliosource and Bibliorelation
+  not appear in the body of the document.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** PortalTransforms V0.3.7 [R1 build 2004/08/24-16:04 by madarche]
 
 Requires:
