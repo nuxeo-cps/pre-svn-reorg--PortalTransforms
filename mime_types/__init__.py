@@ -54,6 +54,27 @@ class application_msword(MimeTypeItem):
     extensions = ('doc',)
     binary     = 1
 
+class application_writer(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "OpenOffice.org Writer Document"
+    mimetypes  = ('application/vnd.sun.xml.writer',)
+    extensions = ('sxw',)
+    binary     = 1
+
+class application_impress(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "OpenOffice.org Impress Document"
+    mimetypes  = ('application/vnd.sun.xml.impress',)
+    extensions = ('sxi',)
+    binary     = 1
+
+class application_calc(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "OpenOffice.org Calc Document"
+    mimetypes  = ('application/vnd.sun.xml.calc',)
+    extensions = ('sxc',)
+    binary     = 1
+
 class text_xml(MimeTypeItem):
 
     __implements__ = MimeTypeItem.__implements__ + (iclassifier,)
@@ -76,9 +97,13 @@ class application_octet_stream(MimeTypeItem):
     binary     = 1
     extensions = ()
 
+# TODO: this list should be automagically computed ising introspection.
 reg_types = [
     text_plain,
     application_msword,
+    application_writer,
+    application_impress,
+    application_calc,
     text_xml,
     text_structured,
     text_rest,

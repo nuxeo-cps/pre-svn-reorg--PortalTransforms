@@ -79,7 +79,16 @@ TRANSFORMS_TESTINFO = (
      "rest1.rst", "rest1.html", None, 0
      ),
     ('Products.PortalTransforms.transforms.xls_to_html',
-     "test1.xls", "test1.html", None, 0
+     "test_excel.xls", "test_excel.html", None, 0
+     ),
+    ('Products.PortalTransforms.transforms.ooo_to_html',
+     "test_writer.sxw", "test_writer.html", None, 0
+     ),
+    ('Products.PortalTransforms.transforms.ooo_to_html',
+     "test_calc.sxc", "test_calc.html", None, 0
+     ),
+    ('Products.PortalTransforms.transforms.ooo_to_html',
+     "test_impress.sxi", "test_impress.html", None, 0
      ),
     )
 
@@ -144,8 +153,6 @@ def make_tests(test_descr=TRANSFORMS_TESTINFO):
             try:
                 _transform = load(_transform).register()
             except:
-                import traceback
-                traceback.print_exc()
                 continue
         #
         if TR_NAMES is not None and not _transform.name() in TR_NAMES:
