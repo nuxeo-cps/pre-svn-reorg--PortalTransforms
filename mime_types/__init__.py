@@ -122,7 +122,7 @@ class application_x_gtar(MimeTypeItem):
     __name__   = "application/x-gtar"
     mimetypes = ('application/x-gtar',)
     binary     = 1
-    extensions = ('tar.gz',)
+    extensions = ('tar.gz', 'tgz', )
 
 # TODO: this list should be automagically computed ising introspection.
 reg_types = [
