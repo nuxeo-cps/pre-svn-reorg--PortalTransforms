@@ -18,13 +18,13 @@ modules = [
     'word_to_html',   # uno, com, wvware
     'xls_to_html',    # xlhtml
     'ooo_to_html',    # unzip + xsltproc
-    'html_to_text',   # re based transform
     'text_to_html',   # wrap text in a verbatim env
     'pdf_to_html',    # sf.net/projects/pdftohtml
     'pdf_to_text',    # www.foolabs.com/xpdf
     'rtf_to_html',    # sf.net/projects/rtf-converter
     'rtf_to_xml',     # sf.net/projects/rtf2xml
     'lynx_dump',      # lynx -dump
+    'html_to_text',   # re based transform
     'python',         # python source files, no dependancies
     'identity',       # identity transform, no dependancies
     ]
