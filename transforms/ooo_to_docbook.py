@@ -27,7 +27,7 @@ class ooo_to_docbook(commandtransform):
 
         tmpdir, fullname = self.initialize_tmpdir(data, **kwargs)
         generated_file_data = self.invokeCommand(tmpdir, fullname)
-        path, images = self.subObjects(tmpdir)
+        path, images = self.subObjects(os.path.join(tmpdir, 'images'))
         objects = {}
         if images:
             self.fixImages(path, images, objects)
