@@ -5,7 +5,7 @@
 
   <xsl:param name="make.valid.html" select="1"/>
 
-  <!-- 
+  <!--
   Print section label (number) along with the section, in the
   document body as well as in the toc.
   -->
@@ -20,6 +20,12 @@
   <xsl:param name="suppress.navigation" select="1"/>
 
   <xsl:param name="spacing.paras" select="1"/>
+
+  <!--
+  Do not let DocBook XSL put style or hardcoded HTML "type" information on
+  lists. We prefer to use the portal CSS.
+  -->
+  <xsl:param name="css.decoration" select="0"/>
 
   <xsl:param name="formal.title.placement">
     figure after
