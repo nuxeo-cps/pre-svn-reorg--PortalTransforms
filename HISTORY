@@ -1,4 +1,23 @@
 *******************************************
+** PortalTransforms V0.3.11 [R1 build 2004/11/15-12:45 by madarche]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Added support for more DocBook tags and various other improvements (appendix
+  support, figure number fix, etc.)
+Bug fixes:
+~~~~~~~~~~
+- In the sx2ml transform commented the treatment of "svg:width" and "svg:height"
+  because it doesn't work, so that images are not generated with a wrong "NaN"
+  width and height.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** PortalTransforms V0.3.10 [R1 build 2004/10/14-17:05 by anahide]
 
 Requires:
