@@ -72,7 +72,7 @@ class application_docbook(MimeTypeItem):
     __name__   = "DocBook XML Document"
     mimetypes  = ('application/docbook+xml',)
     extensions = ('doc.xml', 'docb.xml', 'docb',)
-    binary     = 1
+    binary     = 0
 
 class application_writer(MimeTypeItem):
     __implements__ = MimeTypeItem.__implements__
