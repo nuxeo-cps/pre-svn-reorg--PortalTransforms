@@ -53,7 +53,7 @@ class TestMimeTypes(TestCase):
 
     def testExtension(self):
         reg = self.registry
-        data = "<foo>bar</foo>"
+        data = "Some foo content"
         mt = reg.lookupExtension(filename="test.xml")
         self.failUnless(isinstance(mt, text_xml), str(mt))
 
@@ -68,6 +68,9 @@ class TestMimeTypes(TestCase):
 
         mt = reg.classify(data, filename="test.pdf.gz")
         self.failUnlessEqual(str(mt), 'application/pdf')
+
+        mt = reg.classify(data, filename="test.doc.xml")
+        self.failUnlessEqual(str(mt), 'application/docbook+xml')
 
     def testLookup(self):
         reg = self.registry

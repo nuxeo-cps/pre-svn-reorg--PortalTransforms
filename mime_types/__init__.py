@@ -67,6 +67,13 @@ class application_mspowerpoint(MimeTypeItem):
     extensions = ('ppt',)
     binary     = 1
 
+class application_docbook(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "DocBook XML Document"
+    mimetypes  = ('application/docbook+xml',)
+    extensions = ('doc.xml', 'docb.xml', 'docb',)
+    binary     = 1
+
 class application_writer(MimeTypeItem):
     __implements__ = MimeTypeItem.__implements__
     __name__   = "OpenOffice.org Writer Document"
@@ -123,6 +130,7 @@ reg_types = [
     application_msword,
     application_msexcel,
     application_mspowerpoint,
+    application_docbook,
     application_writer,
     application_impress,
     application_calc,

@@ -3,7 +3,7 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- Adding the 'application/docbook+xml' official mime type
 Bug fixes:
 ~~~~~~~~~~
 -
