@@ -1,4 +1,22 @@
 *******************************************
+** PortalTransforms V0.3.12 [R1 build 2004/11/30-09:49 by madarche]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- For the docbook_to_html transform, all the configuration parameters are now
+  set in a custom-xhtml.xsl file instead of being passed as command line
+  arguments.
+
+*******************************************
 ** PortalTransforms V0.3.11 [R1 build 2004/11/15-12:45 by madarche]
 
 Requires:
