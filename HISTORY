@@ -1,4 +1,21 @@
 *******************************************
+** PortalTransforms V0.1.1 [R1 build 2004/05/06-12:40 by madarche]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Removing a the application/excel erroneous mime-type that creeps in without
+  anybody knowing why
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** PortalTransforms V0.1.0 [R1 build 2004/02/25-08:47 by ben]
 
 Requires:
