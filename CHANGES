@@ -6,7 +6,7 @@ New features:
 - Adding the 'application/docbook+xml' official mime type
 Bug fixes:
 ~~~~~~~~~~
--
+- Fill in cps_suffix_map to differentiate a double extension containing xml.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
