@@ -1,4 +1,20 @@
 *******************************************
+** PortalTransforms V0.3.13 [R1 build 2004/12/01-10:30 by madarche]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Added a missing LOG import.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** PortalTransforms V0.3.12 [R1 build 2004/11/30-09:49 by madarche]
 
 Requires:
