@@ -1,12 +1,13 @@
 *******************************************
-** PortalTransforms V0.3.16 [R1 build 2005/01/20-11:52 by ben]
+** PortalTransforms V1.3.16 [R1 build 2005/01/20-11:52 by ben]
 
 Requires:
 ~~~~~~~~~
 -
 New features:
 ~~~~~~~~~~~~~
--
+- Changing package version number: 0.3.16 is now 1.3.16 
+  and fix old invalid verstion.txt that were containing 1.0.3
 Bug fixes:
 ~~~~~~~~~~
 - Do not let DocBook XSL put style or hardcoded HTML "type" information on
