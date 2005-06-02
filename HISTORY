@@ -1,4 +1,20 @@
 *******************************************
+** PortalTransforms V1.3.17 [R1 build 2005/06/02-12:05 by fguillaume]
+** SVN URL: https://svn.nuxeo.org/pub/PortalTransforms/trunk Revision: 22126
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- ooo2dbk is now an svn:externals pointing to ooo2dbk 1.4.1.
+
+*******************************************
 ** PortalTransforms V1.3.16 [R1 build 2005/01/20-11:52 by ben]
 
 Requires:
