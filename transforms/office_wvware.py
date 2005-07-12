@@ -19,7 +19,6 @@ class document(commandtransform):
 
     def convert(self, output_encoding=ENCODING):
         "Convert the document"
-        raise str(output_encoding)
         tmpdir = self.tmpdir
         cmd = 'cd "%s" && %s --charset=%s "%s" "%s.html"' % (
                                                       tmpdir,
