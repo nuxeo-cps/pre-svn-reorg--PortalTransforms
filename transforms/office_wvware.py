@@ -4,6 +4,8 @@ from Products.PortalTransforms.libtransforms.utils \
 from Products.PortalTransforms.libtransforms.commandtransform \
     import commandtransform
 
+ENCODING = "iso-8859-15"
+
 class document(commandtransform):
 
     def __init__(self, name, data):
@@ -15,12 +17,17 @@ class document(commandtransform):
             name = name + ".doc"
         self.tmpdir, self.fullname = self.initialize_tmpdir(data, filename=name)
 
-    def convert(self):
+    def convert(self, output_encoding=ENCODING):
         "Convert the document"
+        raise str(output_encoding)
         tmpdir = self.tmpdir
-        os.system('cd "%s" && %s "%s" "%s.html"' % (tmpdir, self.binary,
+        cmd = 'cd "%s" && %s --charset=%s "%s" "%s.html"' % (
+                                                      tmpdir,
+                                                      self.binary,
+                                                      output_encoding,
                                                       self.fullname,
-                                                      self.__name__))
+                                                      self.__name__)
+        os.system(cmd)
 
     def html(self):
         htmlfile = open("%s/%s.html" % (self.tmpdir, self.__name__), 'r')
