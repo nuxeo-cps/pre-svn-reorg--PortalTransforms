@@ -39,7 +39,9 @@ class document(commandtransform):
 
             xStorable.storeAsURL("file://%s.html" % self.file, rProperties)
         except Exception, e:
-            print e
+            from zLOG import LOG, ERROR
+            LOG('PortalTransforms.office_uno', ERROR,
+                "Unable to do conversion: %s" % str(e))
             pass
 
         if xStorable is not None:

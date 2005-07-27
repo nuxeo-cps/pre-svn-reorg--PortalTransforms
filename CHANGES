@@ -9,4 +9,4 @@ Bug fixes:
 - word_to_html/posix (wvware) now outputs Latin9 instead of UTF8 by default
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
--
+- Removed some stdout prints, and better LOGs.

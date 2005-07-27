@@ -44,16 +44,10 @@ for m in modules:
         ns = __import__(m, g, g, None)
         LOG(logKey, DEBUG, "Appending transform = %s" % ns)
         transforms.append(ns.register())
-    except ImportError, e:
-        LOG(logKey, WARNING, "Problem importing module %s : %s" % (m, e))
-        print "Problem importing module %s : %s" % (m, e)
+    #except ImportError, e:
+    #    LOG(logKey, WARNING, "Problem importing module %s : %s" % (m, e))
     except MissingBinary, e:
-        LOG(logKey, WARNING, "MissingBinary = %s" % e)
-        print e
-    except:
-        LOG(logKey, WARNING, "Unknow error")
-        import traceback
-        traceback.print_exc()
+        LOG(logKey, WARNING, str(e))
 
 
 def initialize(engine):
