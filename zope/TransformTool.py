@@ -1,5 +1,8 @@
 from OFS.Folder import Folder
-from Products.CMFCore  import CMFCorePermissions
+try:
+    from Products.CMFCore.permissions import ManagePortal
+except ImportError: # BBB: CMF 1.4
+    from Products.CMFCore.CMFCorePermissions import ManagePortal
 from Products.CMFCore.ActionProviderBase import ActionProviderBase
 from Products.CMFCore.utils import UniqueObject
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
@@ -68,7 +71,7 @@ class TransformTool(TransformEngine, UniqueObject, ActionProviderBase, Folder):
             # may fail on copy
             pass
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'manage_addTransform')
+    security.declareProtected(ManagePortal, 'manage_addTransform')
     def manage_addTransform(self, id, module, REQUEST=None):
         """ add a new transform to the tool """
         transform = Transform(id, module)
@@ -77,7 +80,7 @@ class TransformTool(TransformEngine, UniqueObject, ActionProviderBase, Folder):
         if REQUEST is not None:
             REQUEST['RESPONSE'].redirect(self.absolute_url()+'/manage_main')
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'manage_addTransform')
+    security.declareProtected(ManagePortal, 'manage_addTransform')
     def manage_addTransformsChain(self, id, description, REQUEST=None):
         """ add a new transform to the tool """
         transform = TransformsChain(id, description)
@@ -86,14 +89,14 @@ class TransformTool(TransformEngine, UniqueObject, ActionProviderBase, Folder):
         if REQUEST is not None:
             REQUEST['RESPONSE'].redirect(self.absolute_url()+'/manage_main')
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'manage_addTransform')
+    security.declareProtected(ManagePortal, 'manage_addTransform')
     def manage_setCacheValidityTime(self, seconds, REQUEST=None):
         """set  the lifetime of cached data in seconds"""
         self.max_sec_in_cache = int(seconds)
         if REQUEST is not None:
             REQUEST['RESPONSE'].redirect(self.absolute_url()+'/manage_main')
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'reloadTransforms')
+    security.declareProtected(ManagePortal, 'reloadTransforms')
     def reloadTransforms(self, ids=()):
         """ reload transforms with the given ids
         if no ids, reload all registered transforms

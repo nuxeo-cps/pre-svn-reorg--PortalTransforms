@@ -4,7 +4,10 @@ from Acquisition import Implicit
 from OFS.SimpleItem import Item
 from AccessControl.Role import RoleManager
 from AccessControl import ClassSecurityInfo
-from Products.CMFCore  import CMFCorePermissions
+try:
+    from Products.CMFCore.permissions import ManagePortal
+except ImportError: # BBB: CMF 1.4
+    from Products.CMFCore.CMFCorePermissions import ManagePortal
 
 from Products.PortalTransforms.interfaces import itransform
 from Products.PortalTransforms.utils import TransformException, DictClass, \
@@ -170,7 +173,7 @@ class Transform(Implicit, Item, RoleManager, Persistent):
         """return the name of the transform instance"""
         return self.id
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'get_parameters')
+    security.declareProtected(ManagePortal, 'get_parameters')
     def get_parameters(self):
         """ get transform's parameters names """
         if not hasattr(self, '_v_transform'):
@@ -179,7 +182,7 @@ class Transform(Implicit, Item, RoleManager, Persistent):
         keys.sort()
         return keys
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'get_parameter_value')
+    security.declareProtected(ManagePortal, 'get_parameter_value')
     def get_parameter_value(self, key):
         """ get value of a transform's parameter """
         value = self._config[key]
@@ -194,7 +197,7 @@ class Transform(Implicit, Item, RoleManager, Persistent):
             result = value
         return result
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'get_parameter_infos')
+    security.declareProtected(ManagePortal, 'get_parameter_infos')
     def get_parameter_infos(self, key):
         """ get informations about a parameter
 
@@ -209,7 +212,7 @@ class Transform(Implicit, Item, RoleManager, Persistent):
         except KeyError:
             return 'string', '', ''
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'set_parameters')
+    security.declareProtected(ManagePortal, 'set_parameters')
     def set_parameters(self, REQUEST=None, **kwargs):
         """ set transform's parameters """
         if not kwargs:
@@ -240,7 +243,7 @@ class Transform(Implicit, Item, RoleManager, Persistent):
             REQUEST['RESPONSE'].redirect(tr_tool.absolute_url()+'/manage_main')
 
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'reload')
+    security.declareProtected(ManagePortal, 'reload')
     def reload(self):
         """ reload the module where the transformation class is defined """
         log('Reloading transform %s' % self.module)

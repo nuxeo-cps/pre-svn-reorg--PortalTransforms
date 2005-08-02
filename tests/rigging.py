@@ -4,9 +4,12 @@ import sys, os
 import re
 
 try:
-    import Zope # Sigh, make product initialization happen
+    try:
+        import Zope2 # Sigh, make product initialization happen
+    except ImportError: # BBB: for Zope 2.7
+        import Zope as Zope2
     HAS_ZOPE = 1
-    Zope.startup()
+    Zope2.startup()
 except ImportError:
     HAS_ZOPE = 0
 except AttributeError: # Zope > 2.6

@@ -1,5 +1,8 @@
 from OFS.Folder import Folder
-from Products.CMFCore  import CMFCorePermissions
+try:
+    from Products.CMFCore.permissions import ManagePortal
+except ImportError: # BBB: CMF 1.4
+    from Products.CMFCore.CMFCorePermissions import ManagePortal
 from Products.CMFCore.ActionProviderBase import ActionProviderBase
 from Products.CMFCore.TypesTool import  FactoryTypeInformation
 from Products.CMFCore.utils import UniqueObject
@@ -42,8 +45,8 @@ class MimeTypesTool(UniqueObject, ActionProviderBase, Folder, MimeTypesRegistry)
 
     security = ClassSecurityInfo()
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'register')
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'unregister')
+    security.declareProtected(ManagePortal, 'register')
+    security.declareProtected(ManagePortal, 'unregister')
     security.declarePublic('mimetypes')
     security.declarePublic('list_mimetypes')
     security.declarePublic('lookup')
@@ -65,7 +68,7 @@ class MimeTypesTool(UniqueObject, ActionProviderBase, Folder, MimeTypesRegistry)
         result = MimeTypesRegistry.lookup(self, mimetypestring)
         return tuple([m.__of__(self) for m in result])
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'manage_delObjects')
+    security.declareProtected(ManagePortal, 'manage_delObjects')
     def manage_delObjects(self, ids, REQUEST=None):
         """ delete the selected mime types """
         for id in ids:
@@ -73,7 +76,7 @@ class MimeTypesTool(UniqueObject, ActionProviderBase, Folder, MimeTypesRegistry)
         if REQUEST is not None:
             REQUEST['RESPONSE'].redirect(self.absolute_url()+'/manage_main')
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'manage_addMimeType')
+    security.declareProtected(ManagePortal, 'manage_addMimeType')
     def manage_addMimeType(self, id, mimetypes, extensions, icon_path, binary=0,
                            REQUEST=None):
         """add a mime type to the tool"""
@@ -83,7 +86,7 @@ class MimeTypesTool(UniqueObject, ActionProviderBase, Folder, MimeTypesRegistry)
             REQUEST['RESPONSE'].redirect(self.absolute_url()+'/manage_main')
 
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'manage_editMimeType')
+    security.declareProtected(ManagePortal, 'manage_editMimeType')
     def manage_editMimeType(self, name, new_name, mimetypes, extensions, icon_path, binary=0,
                             REQUEST=None):
         """edit a mime type by name"""

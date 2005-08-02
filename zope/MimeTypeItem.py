@@ -2,7 +2,10 @@ from Acquisition import Implicit
 from OFS.SimpleItem import Item
 from AccessControl import ClassSecurityInfo
 from Globals import Persistent, InitializeClass
-from Products.CMFCore  import CMFCorePermissions
+try:
+    from Products.CMFCore.permissions import ManagePortal
+except ImportError: # BBB: CMF 1.4
+    from Products.CMFCore.CMFCorePermissions import ManagePortal
 from Products.PortalTransforms.interfaces import imimetype
 from Products.PortalTransforms.MimeTypeItem import mimetype
 
@@ -19,7 +22,7 @@ class MimeTypeItem(mimetype, Persistent, Implicit, Item):
     security.declarePublic('minor')
     security.declarePublic('normalized')
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'edit')
+    security.declareProtected(ManagePortal, 'edit')
     def edit(self, name, mimetypes, extensions, icon_path, binary=0,
              REQUEST=None):
         """edit this mime type"""

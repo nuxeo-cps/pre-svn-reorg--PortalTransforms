@@ -103,7 +103,8 @@ if TRANSFORMS.has_key('lynx_dump'):
          "test_lynx.html", "test_lynx.txt", None, 0
          ),)
 else:
-    print 'Unable to test unsafe_transforms.lynx_dump'
+    #print 'Unable to test unsafe_transforms.lynx_dump'
+    pass
 
 if TRANSFORMS.has_key('tidy_html'):
     TRANSFORMS_TESTINFO += (
@@ -111,7 +112,8 @@ if TRANSFORMS.has_key('tidy_html'):
          "test_lynx.html", "test_tidy.html", None, 0
          ),)
 else:
-    print 'Unable to test unsafe_transforms.tidy_html'
+    #print 'Unable to test unsafe_transforms.tidy_html'
+    pass
 
 if TRANSFORMS.has_key('xml_to_html'):
     tr = TRANSFORMS['xml_to_html']
@@ -122,7 +124,8 @@ if TRANSFORMS.has_key('xml_to_html'):
          "org-news.xml", "org-news.html", normalize_html, 0
          ),)
 else:
-    print 'Unable to test unsafe_transforms.xml_to_html'
+    #print 'Unable to test unsafe_transforms.xml_to_html'
+    pass
 
 def initialise(transform, normalize, pattern):
     global TRANSFORMS_TESTINFO

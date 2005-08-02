@@ -4,7 +4,10 @@ from Acquisition import Implicit
 from OFS.SimpleItem import Item
 from AccessControl.Role import RoleManager
 from AccessControl import ClassSecurityInfo
-from Products.CMFCore  import CMFCorePermissions
+try:
+    from Products.CMFCore.permissions import ManagePortal, ManageProperties
+except ImportError: # BBB: CMF 1.4
+    from Products.CMFCore.CMFCorePermissions import ManagePortal, ManageProperties
 
 from Products.PortalTransforms.chain import chain
 from Products.PortalTransforms.utils import TransformException, getToolByName, \
@@ -81,7 +84,7 @@ class TransformsChain(Implicit, Item, RoleManager, Persistent):
             tr_tool = getToolByName(self, 'portal_transforms')
             tr_tool.unregisterTransform(self.id)
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'manage_addTransform')
+    security.declareProtected(ManagePortal, 'manage_addTransform')
     def manage_addObject(self, id, REQUEST=None):
         """ add a new transform or chain to the chain """
         assert id not in self._object_ids
@@ -90,7 +93,7 @@ class TransformsChain(Implicit, Item, RoleManager, Persistent):
         if REQUEST is not None:
             REQUEST['RESPONSE'].redirect(self.absolute_url()+'/manage_main')
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'manage_delObjects')
+    security.declareProtected(ManagePortal, 'manage_delObjects')
     def manage_delObjects(self, ids, REQUEST=None):
         """ delete the selected mime types """
         for id in ids:
@@ -102,7 +105,7 @@ class TransformsChain(Implicit, Item, RoleManager, Persistent):
 
     # transforms order handling ###############################################
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'move_object_to_position')
+    security.declareProtected(ManagePortal, 'move_object_to_position')
     def move_object_to_position(self, id, newpos):
         """ overriden from OrderedFolder to store id instead of objects
         """
@@ -114,7 +117,7 @@ class TransformsChain(Implicit, Item, RoleManager, Persistent):
         self._chain_init()
         return 1
 
-    security.declareProtected(CMFCorePermissions.ManageProperties, 'move_object_up')
+    security.declareProtected(ManageProperties, 'move_object_up')
     def move_object_up(self, id, REQUEST=None):
         """  move object with the given id up in the list """
         newpos = self._object_ids.index(id) - 1
@@ -122,7 +125,7 @@ class TransformsChain(Implicit, Item, RoleManager, Persistent):
         if REQUEST is not None:
             REQUEST['RESPONSE'].redirect(self.absolute_url()+'/manage_main')
 
-    security.declareProtected(CMFCorePermissions.ManageProperties, 'move_object_down')
+    security.declareProtected(ManageProperties, 'move_object_down')
     def move_object_down(self, id, REQUEST=None):
         """  move object with the given id down in the list """
         newpos = self._object_ids.index(id) + 1
@@ -133,7 +136,7 @@ class TransformsChain(Implicit, Item, RoleManager, Persistent):
 
     # Z transform interface ###################################################
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'reload')
+    security.declareProtected(ManagePortal, 'reload')
     def reload(self):
         """ reload the module where the transformation class is defined """
         for tr in self.objectValues():
@@ -142,18 +145,18 @@ class TransformsChain(Implicit, Item, RoleManager, Persistent):
 
     # utilities ###############################################################
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'listAddableObjects')
+    security.declareProtected(ManagePortal, 'listAddableObjects')
     def listAddableObjectIds(self):
         """ return a list of addable transform """
         tr_tool = getToolByName(self, 'portal_transforms')
         return [id for id in tr_tool.objectIds() if not (id == self.id or id in self._object_ids)]
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'listAddableObjects')
+    security.declareProtected(ManagePortal, 'listAddableObjects')
     def objectIds(self):
         """ return a list of addable transform """
         return tuple(self._object_ids)
 
-    security.declareProtected(CMFCorePermissions.ManagePortal, 'listAddableObjects')
+    security.declareProtected(ManagePortal, 'listAddableObjects')
     def objectValues(self):
         """ return a list of addable transform """
         tr_tool = getToolByName(self, 'portal_transforms')

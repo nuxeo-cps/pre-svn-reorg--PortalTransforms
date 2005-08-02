@@ -11,7 +11,10 @@ class TransformException(Exception) : pass
 FB_REGISTRY = None
 
 try:
-    import Zope
+    try:
+        import Zope2
+    except ImportError: # BBB: for Zope 2.7
+        import Zope as Zope2
 except ImportError:
     HAS_ZOPE = 0
 
