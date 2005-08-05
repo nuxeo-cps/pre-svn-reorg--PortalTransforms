@@ -1,4 +1,20 @@
 *******************************************
+** PortalTransforms V1.4.0 [R1 build 2005/08/05-14:01 by ben]
+** SVN URL: https://svn.nuxeo.org/pub/PortalTransforms/trunk Revision: 25426
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- word_to_html/posix (wvware) now outputs Latin9 instead of UTF8 by default
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Removed some stdout prints, and better LOGs.
+
+*******************************************
 ** PortalTransforms V1.3.17 [R1 build 2005/06/02-12:05 by fguillaume]
 ** SVN URL: https://svn.nuxeo.org/pub/PortalTransforms/trunk Revision: 22126
 Requires:
