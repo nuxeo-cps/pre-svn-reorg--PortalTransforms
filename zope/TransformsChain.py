@@ -151,12 +151,12 @@ class TransformsChain(Implicit, Item, RoleManager, Persistent):
         tr_tool = getToolByName(self, 'portal_transforms')
         return [id for id in tr_tool.objectIds() if not (id == self.id or id in self._object_ids)]
 
-    security.declareProtected(ManagePortal, 'listAddableObjects')
+    security.declareProtected(ManagePortal, 'objectIds')
     def objectIds(self):
         """ return a list of addable transform """
         return tuple(self._object_ids)
 
-    security.declareProtected(ManagePortal, 'listAddableObjects')
+    security.declareProtected(ManagePortal, 'objectValues')
     def objectValues(self):
         """ return a list of addable transform """
         tr_tool = getToolByName(self, 'portal_transforms')
