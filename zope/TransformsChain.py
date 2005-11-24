@@ -84,7 +84,7 @@ class TransformsChain(Implicit, Item, RoleManager, Persistent):
             tr_tool = getToolByName(self, 'portal_transforms')
             tr_tool.unregisterTransform(self.id)
 
-    security.declareProtected(ManagePortal, 'manage_addTransform')
+    security.declareProtected(ManagePortal, 'manage_addObject')
     def manage_addObject(self, id, REQUEST=None):
         """ add a new transform or chain to the chain """
         assert id not in self._object_ids
@@ -145,7 +145,7 @@ class TransformsChain(Implicit, Item, RoleManager, Persistent):
 
     # utilities ###############################################################
 
-    security.declareProtected(ManagePortal, 'listAddableObjects')
+    security.declareProtected(ManagePortal, 'listAddableObjectIds')
     def listAddableObjectIds(self):
         """ return a list of addable transform """
         tr_tool = getToolByName(self, 'portal_transforms')

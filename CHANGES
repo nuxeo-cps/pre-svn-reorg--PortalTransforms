@@ -6,7 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- Fixed security declarations on some methods.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
