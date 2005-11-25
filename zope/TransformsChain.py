@@ -64,7 +64,7 @@ class TransformsChain(Implicit, Item, RoleManager, Persistent):
         self.inputs = c.inputs or ('application/octet-stream',)
         self.output = c.output or 'application/octet-stream'
 
-    security.declarePublic('get_documentation')
+    security.declarePublic('convert')
     def convert(self, *args, **kwargs):
         """ return apply the transform and return the result """
         if self._chain is None:
