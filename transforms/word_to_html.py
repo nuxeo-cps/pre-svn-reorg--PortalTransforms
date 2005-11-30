@@ -14,7 +14,8 @@ if os.name == 'posix':
     except:
         from office_wvware import document
 else:
-    from office_com import document
+    #from office_com import document
+    from office_wvware import document
 
 from os.path import basename
 
