@@ -1,12 +1,15 @@
 """
 Transform OOo file to HTML through XSL
 """
+# $Id$
+import os
+import sys
+
 from Products.PortalTransforms.interfaces import itransform
 from Products.PortalTransforms.libtransforms.utils \
     import basename, sansext
 from Products.PortalTransforms.libtransforms.commandtransform \
     import commandtransform
-import os
 from zLOG import LOG, DEBUG, WARNING
 
 XSL_STYLESHEET = os.path.join(
@@ -41,12 +44,21 @@ class ooo_to_html(commandtransform):
         return cache
 
     def invokeCommand(self, tmpdir, fullname):
-        cmd = 'cd "%s" && unzip %s 2>error_log 1>/dev/null' % (
-            tmpdir, fullname)
+        if sys.platform == 'win32':
+            cmd = 'unzip %s -d %s' % (fullname, tmpdir)
+        else:
+            cmd = 'cd "%s" && unzip %s 2>error_log 1>/dev/null' % (
+                tmpdir, fullname)
         os.system(cmd)
-        cmd = ('cd "%s" && xsltproc --novalid %s content.xml >"%s.html" '
-            '2>"%s.log-xsltproc"') % (
-            tmpdir, XSL_STYLESHEET, sansext(fullname), sansext(fullname))
+        if sys.platform == 'win32':
+            cmd = 'xsltproc --novalid "%s" "%s" > "%s"' % (
+                XSL_STYLESHEET,
+                os.path.join(tmpdir, 'content.xml'),
+                os.path.join(tmpdir, sansext(fullname)+'.html'))
+        else:
+            cmd = ('cd "%s" && xsltproc --novalid %s content.xml >"%s.html" '
+                   '2>"%s.log-xsltproc"') % (
+                tmpdir, XSL_STYLESHEET, sansext(fullname), sansext(fullname))
         LOG(self.__name__, DEBUG, "cmd = %s" % cmd)
         os.system(cmd)
         try:
