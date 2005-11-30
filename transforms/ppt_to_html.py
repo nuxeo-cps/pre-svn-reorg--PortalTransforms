@@ -21,11 +21,15 @@
 """
 
 """
+import os
+import re
+import sys
+
 from Products.PortalTransforms.interfaces import itransform
 from Products.PortalTransforms.libtransforms.utils import basename, sansext
 from Products.PortalTransforms.libtransforms.commandtransform \
     import commandtransform
-import os, re
+
 
 class ppt_to_html(commandtransform):
     __implements__ = itransform
@@ -55,14 +59,21 @@ class ppt_to_html(commandtransform):
         return cache
 
     def invokeCommand(self, tmpdir, fullname):
-        # FIXME: windows users...
         # FIXME: character encoding
         basename = sansext(fullname)
-        cmd = 'cd "%s" && %s %s "%s" 1> "%s.html" 2>error_log' % (
-            tmpdir, self.binary, self.binaryArgs, fullname, basename)
+        if sys.platform == 'win32':
+            cmd = '%s %s "%s" > "%s.html" 2>"%s"' % (
+                self.binary,
+                self.binaryArgs,
+                fullname,
+                os.path.join(tmpdir, basename),
+                os.path.join(tmpdir, 'error_log'))
+        else:
+            cmd = 'cd "%s" && %s %s "%s" 1> "%s.html" 2>error_log' % (
+                tmpdir, self.binary, self.binaryArgs, fullname, basename)
         os.system(cmd)
         try:
-            htmlfile = open("%s/%s.html" % (tmpdir, basename), 'r')
+            htmlfile = open(os.path.join(tmpdir, basename+'.html'))
             html = htmlfile.read()
             htmlfile.close()
             # Remove filename inserted by ppthtml
@@ -70,7 +81,7 @@ class ppt_to_html(commandtransform):
         # XXX: qualify this except !
         except:
             try:
-                return open("%s/error_log" % tmpdir, 'r').read()
+                return open(os.path.join(tmpdir, 'error_log')).read()
             except:
                 return ''
         return html
