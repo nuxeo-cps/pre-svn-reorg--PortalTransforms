@@ -2,6 +2,7 @@
 Uses the http://sf.net/projects/pdftohtml bin to do its handy work
 
 """
+# $Id$
 import os
 import sys
 
