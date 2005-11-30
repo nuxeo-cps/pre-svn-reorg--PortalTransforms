@@ -2,11 +2,12 @@
 Transform DocBook XML to HTML through XSL
 """
 # $Id$
+import os
+import sys
 
 from Products.PortalTransforms.interfaces import itransform
 from Products.PortalTransforms.libtransforms.utils import bin_search, basename, sansext
 from Products.PortalTransforms.libtransforms.commandtransform import commandtransform
-import os
 from zLOG import LOG, DEBUG, WARNING
 
 class ooo_to_docbook(commandtransform):
@@ -42,9 +43,24 @@ class ooo_to_docbook(commandtransform):
         return cache
 
     def invokeCommand(self, tmpdir, fullname):
-        cmd = ('cd "%s" && %s --dbkfile %s.docb.xml %s '
-            '2>"%s.log-xsltproc"') % (
-            tmpdir, self.binary, sansext(fullname), fullname, sansext(fullname))
+        if sys.platform == 'win32':
+            paths = os.environ['PATH'].split(';')
+            for path in paths:
+                config_path = os.path.join(path, 'ooo2dbk.exe')
+                if os.path.exists(config_path):
+                    cmd = '%s --dbkfile "%s.docb.xml" -c "%s" -x "%s" "%s"' % (
+                        os.path.basename(self.binary),
+                        os.path.join(tmpdir, sansext(fullname)),
+                        os.path.join(path, 'ooo2dbk.xml'),
+                        os.path.join(path, 'ooo2dbk.xsl'),
+                        fullname)
+                    break
+            else:
+                cmd = ''
+        else:
+            cmd = ('cd "%s" && %s --dbkfile %s.docb.xml %s '
+                   '2>"%s.log-xsltproc"') % (
+                tmpdir, self.binary, sansext(fullname), fullname, sansext(fullname))
         LOG(self.__name__, DEBUG, "cmd = %s" % cmd)
         os.system(cmd)
         try:

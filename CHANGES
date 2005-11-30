@@ -8,6 +8,7 @@ New features:
 - Support of ppt_to_html on win32
 - Support of xls_to_html on win32
 - Support of ooo_to_html on win32
+- Support of ooo_to_docbook on win32
 Bug fixes:
 ~~~~~~~~~~
 - Fixed security declarations on some methods.
