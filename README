@@ -84,6 +84,9 @@ You need ooo2dbk.exe binary, that you can create from code located at
 svn co http://svn.nuxeo.org/pub/ooo2dbk
 README in ooo2dbk sources contains information how to compile it on win32.
 
+For word_to_html:
+http://ovh.dl.sourceforge.net/sourceforge/gnuwin32/wv-1.0.2.exe
+
 
 Documentation
 -------------

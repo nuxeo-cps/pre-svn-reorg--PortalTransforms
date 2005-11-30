@@ -1,4 +1,5 @@
 import os
+import sys
 from Products.PortalTransforms.libtransforms.utils \
     import bodyfinder, scrubHTML
 from Products.PortalTransforms.libtransforms.commandtransform \
@@ -11,7 +12,10 @@ class document(commandtransform):
     def __init__(self, name, data):
         """ Initialization: create tmp work directory and copy the
         document into a file"""
-        commandtransform.__init__(self, name, binary="wvHtml")
+        binary = 'wvHtml'
+        if sys.platform == 'win32':
+            binary = 'wvWare'
+        commandtransform.__init__(self, name, binary=binary)
         name = self.name()
         if not name.endswith('.doc'):
             name = name + ".doc"
@@ -20,16 +24,33 @@ class document(commandtransform):
     def convert(self, output_encoding=ENCODING):
         "Convert the document"
         tmpdir = self.tmpdir
-        cmd = 'cd "%s" && %s --charset=%s "%s" "%s.html"' % (
-                                                      tmpdir,
-                                                      self.binary,
-                                                      output_encoding,
-                                                      self.fullname,
-                                                      self.__name__)
+
+        if sys.platform == 'win32':
+            paths = os.environ['PATH'].split(';')
+            for path in paths:
+                config_path = os.path.join(path, 'wvHtml.xml')
+                if os.path.exists(config_path):
+                    cmd = '%s --charset=%s -x "%s" "%s" > "%s"' % (
+                        self.binary,
+                        output_encoding,
+                        config_path,
+                        self.fullname,
+                        os.path.join(tmpdir, self.__name__+'.html'))
+                    break
+            else:
+                cmd = ''
+        else:
+            cmd = 'cd "%s" && %s --charset=%s "%s" "%s.html"' % (
+                tmpdir,
+                self.binary,
+                output_encoding,
+                self.fullname,
+                self.__name__)
+
         os.system(cmd)
 
     def html(self):
-        htmlfile = open("%s/%s.html" % (self.tmpdir, self.__name__), 'r')
+        htmlfile = open(os.path.join(self.tmpdir, self.__name__+'.html'))
         html = htmlfile.read()
         htmlfile.close()
         html = scrubHTML(html)
