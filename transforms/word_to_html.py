@@ -1,3 +1,4 @@
+# $Id$
 from Products.PortalTransforms.interfaces import itransform
 
 EXTRACT_BODY  = 1
