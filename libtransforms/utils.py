@@ -1,5 +1,6 @@
 import re
 import os
+import sys
 from os.path import basename, splitext, join
 from sgmllib import SGMLParser
 
@@ -15,6 +16,9 @@ class MissingBinary(Exception): pass
 def bin_search(binary):
     """search the bin_search_path  for a given binary
     returning its fullname or None"""
+    if sys.platform == 'win32':
+        # Directory containing 'binary' should be in PATH
+        return binary
     result = None
     mode   = os.R_OK | os.X_OK
     for p in bin_search_path:

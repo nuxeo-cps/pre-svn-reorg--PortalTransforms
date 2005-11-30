@@ -2,10 +2,13 @@
 Uses the http://sf.net/projects/pdftohtml bin to do its handy work
 
 """
+import os
+import sys
+
 from Products.PortalTransforms.interfaces import itransform
 from Products.PortalTransforms.libtransforms.utils import bin_search, basename, sansext
 from Products.PortalTransforms.libtransforms.commandtransform import commandtransform
-from os import system
+
 
 class pdf_to_html(commandtransform):
     __implements__ = itransform
@@ -35,17 +38,21 @@ class pdf_to_html(commandtransform):
         return cache
 
     def invokeCommand(self, tmpdir, fullname):
-        # FIXME: windows users...
-        cmd = 'cd "%s" && %s %s "%s" 2>error_log 1>/dev/null' % (
-            tmpdir, self.binary, self.binaryArgs, fullname)
-        system(cmd)
+        if sys.platform == 'win32':
+            cmd = '%s %s "%s" 2>"%s"' % (self.binary, self.binaryArgs,
+                                         fullname,
+                                         os.path.join(tmpdir, 'error_log'))
+        else:
+            cmd = 'cd "%s" && %s %s "%s" 2>error_log 1>/dev/null' % (
+                tmpdir, self.binary, self.binaryArgs, fullname)
+        os.system(cmd)
         try:
-            htmlfile = open("%s/%s.html" % (tmpdir, sansext(fullname)), 'r')
+            htmlfile = open(os.path.join(tmpdir, sansext(fullname)+'.html'))
             html = htmlfile.read()
             htmlfile.close()
         except:
             try:
-                return open("%s/error_log" % tmpdir, 'r').read()
+                return open(os.path.join(tmpdir, 'error_log')).read()
             except:
                 return ''
         return html

@@ -4,7 +4,7 @@ Portal Transforms
 This Zope product provides two new tools for the CMF in order to make MIME
 types based transformations on the portal contents, and so an easy to way to
 plugin some new transformations for previously unsupported content types. The
-provided tools are : 
+provided tools are :
 
  * mimetypes_registry (the mimetypes tool) : handle mime types information
 
@@ -18,7 +18,7 @@ Notice this package can also be used as a standalone Python package. If
 you've downloaded the Python distribution, you can't make it a Zope
 product since Zope files have been removed from this distribution.
 
-This product is an off-spring of the Archetypes project. 
+This product is an off-spring of the Archetypes project.
 
 
 Installation
@@ -32,7 +32,7 @@ Zope
 
   * Put this package in your Zope's Products directory and restart Zope
 
-  * either use the QuickInstaller to add this product to your CMF site or add an 
+  * either use the QuickInstaller to add this product to your CMF site or add an
   external method to the root of your CMF site with the following information :
 
     :module: PortalTransforms.Install
@@ -44,14 +44,24 @@ Zope
 Python
 ``````
 
-  * Extract the tarball 
+  * Extract the tarball
 
   * Run "python setup.py install". See "python setup.py install  --help" for
-  installation options. 
+  installation options.
 
   * That's it, you should have the library and the *transform* command line tool
   installed.
 
+
+Windows
+-------
+To make transforms work under Microsoft Windows you should put corresponding
+windows binaries of converters in directory and put directory into windows
+PATH variable.
+
+For pdf_to_html:
+http://ovh.dl.sourceforge.net/sourceforge/pdftohtml/pdftohtml-0.36-win32.zip
+ftp://ftp.foolabs.com/pub/xpdf/xpdf-3.01-win32.zip
 
 Documentation
 -------------
