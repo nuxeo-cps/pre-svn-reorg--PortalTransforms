@@ -3,7 +3,8 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- Support of pdf_to_html on win32
+- Support of docbook_to_html on win32
 Bug fixes:
 ~~~~~~~~~~
 - Fixed security declarations on some methods.

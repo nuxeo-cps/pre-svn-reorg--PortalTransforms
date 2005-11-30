@@ -2,11 +2,12 @@
 Transform DocBook XML to HTML through XSL
 """
 # $Id$
+import os
+import sys
 
 from Products.PortalTransforms.interfaces import itransform
 from Products.PortalTransforms.libtransforms.utils import bin_search, basename, sansext
 from Products.PortalTransforms.libtransforms.commandtransform import commandtransform
-import os
 from zLOG import LOG, DEBUG, WARNING
 
 XSL_STYLESHEET = os.path.join(
@@ -38,9 +39,13 @@ class docbook_to_html(commandtransform):
             subfile_path = os.path.join(tmp_image_dir_path, subfile_name)
             subfile = open(subfile_path, 'w+c')
             subfile.write(str(v))
+            subfile.close()
 
         html = self.invokeCommand(tmpdir, fullname)
-        html = html.replace('img src="images/', 'img src="')
+        if sys.platform == 'win32':
+            html = html.replace('img src="images\\', 'img src="')
+        else:
+            html = html.replace('img src="images/', 'img src="')
         try:
             path, images = self.subObjects(os.path.join(tmpdir,
                                                         'images'))
@@ -56,18 +61,23 @@ class docbook_to_html(commandtransform):
         return cache
 
     def invokeCommand(self, tmpdir, fullname):
-        cmd = ('cd "%s" && %s --novalid %s %s >"%s.html" 2>"%s.log-xsltproc"'
-               % (tmpdir, self.binary, XSL_STYLESHEET, fullname,
-                  sansext(fullname), sansext(fullname)))
+        if sys.platform == 'win32':
+            cmd = '%s --novalid "%s" "%s" > "%s"' % (
+                self.binaryName, XSL_STYLESHEET, fullname,
+                os.path.join(tmpdir, sansext(fullname)+'.html'))
+        else:
+            cmd = ('cd "%s" && %s --novalid %s %s >"%s.html" 2>"%s.log-xsltproc"'
+                   % (tmpdir, self.binary, XSL_STYLESHEET, fullname,
+                      sansext(fullname), sansext(fullname)))
         LOG(self.__name__, DEBUG, "cmd = %s" % cmd)
         os.system(cmd)
         try:
-            htmlfile = open("%s/%s.html" % (tmpdir, sansext(fullname)), 'r')
+            htmlfile = open(os.path.join(tmpdir, sansext(fullname)+'.html'))
             html = htmlfile.read()
             htmlfile.close()
         except:
             try:
-                return open("%s/error_log" % tmpdir, 'r').read()
+                return open(os.path.join(tmpdir, 'error_log')).read()
             except:
                 return ''
         return html

@@ -63,6 +63,13 @@ For pdf_to_html:
 http://ovh.dl.sourceforge.net/sourceforge/pdftohtml/pdftohtml-0.36-win32.zip
 ftp://ftp.foolabs.com/pub/xpdf/xpdf-3.01-win32.zip
 
+For docbook_to_html:
+http://www.zlatkovic.com/pub/libxml/libxslt-1.1.14+.win32.zip
+http://www.zlatkovic.com/pub/libxml/libxml2-2.6.20.win32.zip
+http://www.zlatkovic.com/pub/libxml/iconv-1.9.1.win32.zip
+http://www.zlatkovic.com/pub/libxml/zlib-1.2.3.win32.zip
+
+
 Documentation
 -------------
 See the *docs* directory in this package.
