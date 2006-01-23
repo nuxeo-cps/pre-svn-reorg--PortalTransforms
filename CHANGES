@@ -3,18 +3,10 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
-- Support of pdf_to_html on win32
-- Support of docbook_to_html on win32
-- Support of ppt_to_html on win32
-- Support of xls_to_html on win32
-- Support of ooo_to_html on win32
-- Support of ooo_to_docbook on win32
-- Support of word_to_html on win32 by using wvWare
+-
 Bug fixes:
 ~~~~~~~~~~
-- Fixed security declarations on some methods.
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
-- Switched to new stable version of ooo2dbk which includes many small bugfixes.
-- By default wvware will be used to convert word documents to html on
-  win32 platform.
+-
