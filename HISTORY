@@ -1,4 +1,20 @@
 *******************************************
+** PortalTransforms V1.6.1 [R1 build 2006/02/17-20:34 by fermigier]
+** SVN URL: https://svn.nuxeo.org/pub/PortalTransforms/trunk Revision: 33081
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Changed icons (?)
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** PortalTransforms V1.6.0 [R1 build 2006/01/23-17:36 by fermigier]
 ** SVN URL: https://svn.nuxeo.org/pub/PortalTransforms/trunk Revision: 31976
 Requires:
