@@ -1,5 +1,5 @@
 from Products.PortalTransforms.interfaces import itransform
-from Products.CMFCore.utils import format_stx
+from StructuredText.StructuredText import HTML
 
 class st:
     __implements__ = itransform
@@ -12,7 +12,7 @@ class st:
         return self.__name__
 
     def convert(self, orig, data, **kwargs):
-        data.setData(format_stx(text=orig, level=1))
+        data.setData(HTML(text=orig, level=1))
         return data
 
 def register():
