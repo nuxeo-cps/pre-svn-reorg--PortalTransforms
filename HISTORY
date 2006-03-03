@@ -1,4 +1,20 @@
 *******************************************
+** PortalTransforms V1.7.0 [R1 build 2006/03/03-17:50 by ben]
+** SVN URL: https://svn.nuxeo.org/pub/PortalTransforms/trunk Revision: 33914
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- use StructuredText
+
+*******************************************
 ** PortalTransforms V1.6.1 [R1 build 2006/02/17-20:34 by fermigier]
 ** SVN URL: https://svn.nuxeo.org/pub/PortalTransforms/trunk Revision: 33081
 Requires:
