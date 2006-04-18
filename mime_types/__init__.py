@@ -1,3 +1,5 @@
+# $Id$
+
 from Products.PortalTransforms.interfaces import iclassifier
 from Products.PortalTransforms.MimeTypeItem import MimeTypeItem, \
      MimeTypeException
@@ -124,7 +126,7 @@ class application_x_gtar(MimeTypeItem):
     binary     = 1
     extensions = ('tar.gz', 'tgz', )
 
-# TODO: this list should be automagically computed ising introspection.
+# TODO: this list should be automagically computed using introspection.
 reg_types = [
     text_plain,
     application_msword,
