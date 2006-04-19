@@ -177,6 +177,7 @@ EXCLUDE_TESTS = ['tidy_html',
                  'xls_to_html',
                  'ooo_to_html',
                  'rest_to_html',
+                 'opendocument_to_html',
                 ]
 
 def make_tests(test_descr=TRANSFORMS_TESTINFO):
