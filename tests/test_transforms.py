@@ -102,6 +102,22 @@ TRANSFORMS_TESTINFO = (
      "test_opendocument_writer.ott", "test_opendocument_writer.ott.html",
       None, 0
      ),
+    ('Products.PortalTransforms.transforms.opendocument_to_html',
+     "test_opendocument_calc.ods", "test_opendocument_calc.ods.html",
+      None, 0
+     ),
+    ('Products.PortalTransforms.transforms.opendocument_to_html',
+     "test_opendocument_calc.ots", "test_opendocument_calc.ots.html",
+      None, 0
+     ),
+    ('Products.PortalTransforms.transforms.opendocument_to_html',
+     "test_opendocument_impress.odp", "test_opendocument_impress.odp.html",
+      None, 0
+     ),
+    ('Products.PortalTransforms.transforms.opendocument_to_html',
+     "test_opendocument_impress.otp", "test_opendocument_impress.otp.html",
+      None, 0
+     ),
     )
 
 from Products.PortalTransforms.unsafe_transforms.build_transforms import TRANSFORMS

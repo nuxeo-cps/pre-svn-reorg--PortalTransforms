@@ -70,19 +70,23 @@
  
  <xsl:key name="listTypes" match="text:list-style" use="@style:name" />
  
- <xsl:template match="/office:document">
+
+<xsl:template match="/*"> 
+
  <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
  <title><xsl:value-of select="$title"></xsl:value-of></title>
  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
- <xsl:apply-templates select="office:automatic-styles"/>
+    <xsl:apply-templates select="office:automatic-styles"/>
  </head>
  <body>
- <xsl:apply-templates select="office:body/office:text"/>
+    <xsl:apply-templates select="office:body/office:text"/>
+    <xsl:apply-templates select="office:body/office:spreadsheet"/>
+    <xsl:apply-templates select="office:body/office:presentation"/>
  </body>
  </html>
- </xsl:template>
- 
+</xsl:template> 
+
  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
  <!--
          This section of the transformation handles styles in the
@@ -525,4 +529,5 @@
              <int:attr name="fo:line-height" action="pass-through"/>
              <int:attr name="fo:text-align" action="check-align"/>
      </int:attr-map>
+
      </xsl:stylesheet>

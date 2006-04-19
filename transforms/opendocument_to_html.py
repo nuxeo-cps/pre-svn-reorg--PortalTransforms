@@ -21,10 +21,10 @@ class opendocument_to_html(commandtransform):
     __name__ = 'opendocument_to_html'
     inputs = ('application/vnd.oasis.opendocument.text',
               'application/vnd.oasis.opendocument.text-template',
-             # 'application/vnd.oasis.opendocument.spreadsheet',
-             # 'application/vnd.oasis.opendocument.spreadsheet-template',
-             # 'application/vnd.oasis.opendocument.presentation',
-             # 'application/vnd.oasis.opendocument.presentation-template',
+              'application/vnd.oasis.opendocument.spreadsheet',
+              'application/vnd.oasis.opendocument.spreadsheet-template',
+              'application/vnd.oasis.opendocument.presentation',
+              'application/vnd.oasis.opendocument.presentation-template',
              # 'application/vnd.oasis.opendocument.graphics',
              # 'application/vnd.oasis.opendocument.graphics-template',
               )
