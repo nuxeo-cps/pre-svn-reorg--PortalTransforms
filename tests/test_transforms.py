@@ -156,6 +156,12 @@ initialise('Products.PortalTransforms.transforms.python', normalize_html, "*.py"
 
 # FIXME some tests do not pass - exclude them
 TR_NAMES = None
+EXCLUDE_TESTS = ['tidy_html',
+                 'word_to_html',
+                 'xls_to_html',
+                 'ooo_to_html',
+                 'rest_to_html',
+                ]
 
 def make_tests(test_descr=TRANSFORMS_TESTINFO):
     """generate tests classes from test info
@@ -170,9 +176,13 @@ def make_tests(test_descr=TRANSFORMS_TESTINFO):
                 _transform = load(_transform).register()
             except:
                 continue
-        #
+                
         if TR_NAMES is not None and not _transform.name() in TR_NAMES:
             print 'skip test for', _transform.name()
+            continue
+        
+        if EXCLUDE_TESTS is not None and _transform.name() in EXCLUDE_TESTS:
+            print 'exclude %s testing for input %s' % ( _transform.name(), tr_input)
             continue
 
         class TransformTestSubclass(TransformTest):
@@ -187,8 +197,8 @@ def make_tests(test_descr=TRANSFORMS_TESTINFO):
     return tests
 
 def test_suite():
-    return TestSuite([])
-    #return TestSuite([makeSuite(test) for test in make_tests()])
+    #return TestSuite([])
+    return TestSuite([makeSuite(test) for test in make_tests()])
 
 if __name__=='__main__':
     if len(sys.argv) > 1:
