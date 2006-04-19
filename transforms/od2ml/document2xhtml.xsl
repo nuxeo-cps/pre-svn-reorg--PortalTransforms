@@ -4,6 +4,8 @@
  
      Copyright (C) 2005-2006 J. David Eisenberg <catcode@catcode.com>
      Copyright (C) 2005-2006 Arend van Beelen jr. <arend@auton.nl>
+     Copyright (C) 2006 Nuxeo <lgodard@indesko.com>
+
  
      This library is free software; you can redistribute it and/or
      modify it under the terms of the GNU Lesser General Public
@@ -18,6 +20,8 @@
      You should have received a copy of the GNU Lesser General Public
      License along with this library; if not, write to the Free Software
      Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+$Id$
  -->
  
  <xsl:stylesheet version="1.0"
@@ -80,6 +84,13 @@
     <xsl:apply-templates select="office:automatic-styles"/>
  </head>
  <body>
+    <!-- each document type has a different body content name
+         each apply-templates is dedicated to an OpenDocument file type
+         (templates are also supported)
+         office:text : writer file
+         office:spreadsheet : calc file
+         office:presentation : impress file
+    --> 
     <xsl:apply-templates select="office:body/office:text"/>
     <xsl:apply-templates select="office:body/office:spreadsheet"/>
     <xsl:apply-templates select="office:body/office:presentation"/>
