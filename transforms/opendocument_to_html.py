@@ -1,7 +1,7 @@
 """
 Transform OOo OpenDocument file to HTML through XSL
 """
-# $Id: opendocument_to_html.py 30141 2005-11-30 15:54:35Z lgodard $
+# $Id$
 import os
 import sys
 
