@@ -49,6 +49,7 @@ class TransformTest( TestCase ):
             self.subobjects, len(res_data.getSubObjects()), self.transform.name(), self.input))
 
     def testSame(self):
+        print >>sys.stdout, '\n\t\t%s' % (self.input)
         self.do_convert(filename=self.input)
 
     def testSameNoFilename(self):
@@ -92,6 +93,14 @@ TRANSFORMS_TESTINFO = (
      ),
     ('Products.PortalTransforms.transforms.ooo_to_html',
      "test_impress.sxi", "test_impress.html", None, 0
+     ),
+    ('Products.PortalTransforms.transforms.opendocument_to_html',
+     "test_opendocument_writer.odt", "test_opendocument_writer.odt.html",
+      None, 0
+     ),
+    ('Products.PortalTransforms.transforms.opendocument_to_html',
+     "test_opendocument_writer.ott", "test_opendocument_writer.ott.html",
+      None, 0
      ),
     )
 
@@ -145,6 +154,7 @@ initialise('Products.PortalTransforms.transforms.python', normalize_html, "*.py"
 
 # FIXME missing tests for image_to_html, st
 
+# FIXME some tests do not pass - exclude them
 TR_NAMES = None
 
 def make_tests(test_descr=TRANSFORMS_TESTINFO):
@@ -177,8 +187,8 @@ def make_tests(test_descr=TRANSFORMS_TESTINFO):
     return tests
 
 def test_suite():
-    return TestSuite([])
-    #return TestSuite([makeSuite(test) for test in make_tests()])
+    #return TestSuite([])
+    return TestSuite([makeSuite(test) for test in make_tests()])
 
 if __name__=='__main__':
     if len(sys.argv) > 1:

@@ -1,5 +1,3 @@
-# $Id$
-
 from Products.PortalTransforms.interfaces import iclassifier
 from Products.PortalTransforms.MimeTypeItem import MimeTypeItem, \
      MimeTypeException
@@ -39,7 +37,6 @@ class text_python(MimeTypeItem):
     extensions = ("py",)
     binary     = 0
 
-
 class application_rtf(MimeTypeItem):
 
     __implements__ = MimeTypeItem.__implements__
@@ -78,23 +75,114 @@ class application_docbook(MimeTypeItem):
 
 class application_writer(MimeTypeItem):
     __implements__ = MimeTypeItem.__implements__
-    __name__   = "OpenOffice.org Writer Document"
+    __name__   = "OpenOffice.org 1.x Writer Document"
     mimetypes  = ('application/vnd.sun.xml.writer',)
     extensions = ('sxw',)
     binary     = 1
 
+class application_writer_template(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "OpenOffice.org 1.x Writer Template"
+    mimetypes  = ('application/vnd.sun.xml.writer.template',)
+    extensions = ('stw',)
+    binary     = 1
+
 class application_impress(MimeTypeItem):
     __implements__ = MimeTypeItem.__implements__
-    __name__   = "OpenOffice.org Impress Document"
+    __name__   = "OpenOffice.org 1.x Impress Document"
     mimetypes  = ('application/vnd.sun.xml.impress',)
     extensions = ('sxi',)
     binary     = 1
 
+class application_impress_template(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "OpenOffice.org 1.x Impress Template"
+    mimetypes  = ('application/vnd.sun.xml.impress.template',)
+    extensions = ('sti',)
+    binary     = 1
+
 class application_calc(MimeTypeItem):
     __implements__ = MimeTypeItem.__implements__
-    __name__   = "OpenOffice.org Calc Document"
+    __name__   = "OpenOffice.org 1.x Calc Document"
     mimetypes  = ('application/vnd.sun.xml.calc',)
     extensions = ('sxc',)
+    binary     = 1
+
+class application_calc_template(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "OpenOffice.org 1.x Calc Template"
+    mimetypes  = ('application/vnd.sun.xml.calc.template',)
+    extensions = ('stc',)
+    binary     = 1
+
+class application_draw(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "OpenOffice.org 1.x Draw Document"
+    mimetypes  = ('application/vnd.sun.xml.draw',)
+    extensions = ('sxd',)
+    binary     = 1
+    
+class application_draw_template(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "OpenOffice.org 1.x Draw Template"
+    mimetypes  = ('application/vnd.sun.xml.draw.template',)
+    extensions = ('std',)
+    binary     = 1
+
+class application_opendocument_calc(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "OpenOffice.org 2.x Calc Document"
+    mimetypes  = ('application/vnd.oasis.opendocument.spreadsheet',)
+    extensions = ('ods',)
+    binary     = 1
+
+class application_opendocument_calc_template(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "OpenOffice.org 2.x Calc Template"
+    mimetypes  = ('application/vnd.oasis.opendocument.spreadsheet-template',)
+    extensions = ('ots',)
+    binary     = 1
+    
+class application_opendocument_writer(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "OpenOffice.org 2.x Writer Document"
+    mimetypes  = ('application/vnd.oasis.opendocument.text',)
+    extensions = ('odt',)
+    binary     = 1
+    
+class application_opendocument_writer_template(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "OpenOffice.org 2.x Writer Template"
+    mimetypes  = ('application/vnd.oasis.opendocument.text-template',)
+    extensions = ('ott',)
+    binary     = 1
+
+class application_opendocument_impress(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "OpenOffice.org 2.x Impress Document"
+    mimetypes  = ('application/vnd.oasis.opendocument.presentation',)
+    extensions = ('odp',)
+    binary     = 1
+
+class application_opendocument_impress_template(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "OpenOffice.org 2.x Impress Template"
+    mimetypes  = ('application/vnd.oasis.opendocument.presentation-template',)
+    extensions = ('otp',)
+    binary     = 1
+
+class application_opendocument_graphics(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "OpenOffice.org 2.x Draw Document"
+    mimetypes  = ('application/vnd.oasis.opendocument.graphics',)
+    extensions = ('odg',)
+    binary     = 1
+    
+class application_opendocument_graphics_template(MimeTypeItem):
+    __implements__ = MimeTypeItem.__implements__
+    __name__   = "OpenOffice.org 2.x Draw Template"
+    mimetypes  = ('application/vnd.oasis.opendocument.graphics-template',)
+    extensions = ('otg',)
     binary     = 1
 
 class text_xml(MimeTypeItem):
@@ -126,7 +214,7 @@ class application_x_gtar(MimeTypeItem):
     binary     = 1
     extensions = ('tar.gz', 'tgz', )
 
-# TODO: this list should be automagically computed using introspection.
+# TODO: this list should be automagically computed ising introspection.
 reg_types = [
     text_plain,
     application_msword,
@@ -134,8 +222,21 @@ reg_types = [
     application_mspowerpoint,
     application_docbook,
     application_writer,
+    application_writer_template,
     application_impress,
+    application_impress_template,
     application_calc,
+    application_calc_template,
+    application_draw,
+    application_draw_template,
+    application_opendocument_writer,
+    application_opendocument_writer_template,
+    application_opendocument_impress,
+    application_opendocument_impress_template,
+    application_opendocument_calc,
+    application_opendocument_calc_template,
+    application_opendocument_graphics,
+    application_opendocument_graphics_template,
     text_xml,
     text_structured,
     text_rest,

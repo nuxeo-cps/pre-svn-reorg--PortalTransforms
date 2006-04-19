@@ -1,7 +1,7 @@
 """
-Transform OOo file to HTML through XSL
+Transform OOo OpenDocument file to HTML through XSL
 """
-# $Id$
+# $Id: opendocument_to_html.py 30141 2005-11-30 15:54:35Z lgodard $
 import os
 import sys
 
@@ -12,19 +12,21 @@ from Products.PortalTransforms.libtransforms.commandtransform \
     import commandtransform
 from zLOG import LOG, DEBUG, WARNING
 
-XSL_STYLESHEET = os.path.join(
-  os.getcwd(), os.path.dirname(__file__), 'sx2ml', 'main_html.xsl')
+XSL_STYLESHEET_TRANSFORM = os.path.join(
+  os.getcwd(), os.path.dirname(__file__), 'od2ml', 'document2xhtml.xsl')
 
-class ooo_to_html(commandtransform):
+class opendocument_to_html(commandtransform):
     __implements__ = itransform
 
-    __name__ = 'ooo_to_html'
-    inputs = ('application/vnd.sun.xml.writer',
-              'application/vnd.sun.xml.impress',
-              'application/vnd.sun.xml.calc',
-              'application/vnd.sun.xml.writer.template',
-              'application/vnd.sun.xml.impress.template',
-              'application/vnd.sun.xml.calc.template',
+    __name__ = 'opendocument_to_html'
+    inputs = ('application/vnd.oasis.opendocument.text',
+              'application/vnd.oasis.opendocument.text-template',
+             # 'application/vnd.oasis.opendocument.spreadsheet',
+             # 'application/vnd.oasis.opendocument.spreadsheet-template',
+             # 'application/vnd.oasis.opendocument.presentation',
+             # 'application/vnd.oasis.opendocument.presentation-template',
+             # 'application/vnd.oasis.opendocument.graphics',
+             # 'application/vnd.oasis.opendocument.graphics-template',
               )
     output = 'text/html'
 
@@ -54,17 +56,24 @@ class ooo_to_html(commandtransform):
             cmd = 'cd "%s" && unzip %s 2>error_log 1>/dev/null' % (
                 tmpdir, fullname)
         os.system(cmd)
+        
+        #process transform
         if sys.platform == 'win32':
             cmd = 'xsltproc --novalid "%s" "%s" > "%s"' % (
-                XSL_STYLESHEET,
+                XSL_STYLESHEET_TRANSFORM,
                 os.path.join(tmpdir, 'content.xml'),
                 os.path.join(tmpdir, sansext(fullname)+'.html'))
         else:
             cmd = ('cd "%s" && xsltproc --novalid %s content.xml >"%s.html" '
                    '2>"%s.log-xsltproc"') % (
-                tmpdir, XSL_STYLESHEET, sansext(fullname), sansext(fullname))
+                                            tmpdir, 
+                                            XSL_STYLESHEET_TRANSFORM, 
+                                            sansext(fullname),
+                                            sansext(fullname)
+                                            )
         LOG(self.__name__, DEBUG, "cmd = %s" % cmd)
         os.system(cmd)
+        
         try:
             htmlfile = open(os.path.join(tmpdir, "%s.html" % sansext(fullname)),
                             'r')
@@ -78,4 +87,4 @@ class ooo_to_html(commandtransform):
         return html
 
 def register():
-    return ooo_to_html()
+    return opendocument_to_html()

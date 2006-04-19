@@ -23,6 +23,7 @@ modules = [
     'xls_to_html',    # xlhtml
     'ppt_to_html',    # ppthtml
     'ooo_to_html',    # unzip + xsltproc
+    'opendocument_to_html',    # unzip + xsltproc http://opendocumentfoundation.org
     'ooo_to_docbook', # OOo2sDBK http://www.chez.com/ebellot/ooo2sdbk/
     'docbook_to_html',# xsltproc + http://docbook.sourceforge.net/
     'text_to_html',   # wrap text in a verbatim env
