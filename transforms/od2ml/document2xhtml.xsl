@@ -4,7 +4,7 @@
  
      Copyright (C) 2005-2006 J. David Eisenberg <catcode@catcode.com>
      Copyright (C) 2005-2006 Arend van Beelen jr. <arend@auton.nl>
-     Copyright (C) 2006 Nuxeo <lgodard@indesko.com>
+     Copyright (C) 2006 Nuxeo SAS <lgodard@indesko.com>
 
  
      This library is free software; you can redistribute it and/or
