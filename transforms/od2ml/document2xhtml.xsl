@@ -83,7 +83,7 @@ $Id$
  FIXME xsltproc bug on testing machine mixes tags : tests fail 
  <title><xsl:value-of select="$title"></xsl:value-of></title>
   -->
- <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <xsl:apply-templates select="office:automatic-styles"/>
  </head>
  <body>
