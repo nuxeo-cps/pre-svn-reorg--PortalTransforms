@@ -25,16 +25,18 @@ class TransformTest( TestCase ):
         res_data = self.transform.convert(orig, data, filename=filename)
         self.assert_(implements(res_data, idatastream))
         got = res_data.getData()
+        
         try:
             output = open(output)
         except IOError:
-            import sys
+            #import sys
             print >>sys.stderr, 'No output file found.'
             print >>sys.stderr, 'File %s created, check it !' % self.output
             output = open(output, 'w')
             output.write(got)
             output.close()
             self.assert_(0)
+            
         expected = output.read()
         if self.normalize is not None:
             expected = self.normalize(expected)
@@ -43,10 +45,17 @@ class TransformTest( TestCase ):
 
         self.assertEquals(got, expected,
                           '[%s]\n\n!=\n\n[%s]\n\nIN %s(%s)' % (
-            got, expected, self.transform.name(), self.input))
+                                    got,
+                                    expected, 
+                                    self.transform.name(), 
+                                    self.input))
+
         self.assertEquals(self.subobjects, len(res_data.getSubObjects()),
-                          '%s\n\n!=\n\n%s\n\nIN %s(%s)' % (
-            self.subobjects, len(res_data.getSubObjects()), self.transform.name(), self.input))
+                                    '%s\n\n!=\n\n%s\n\nIN %s(%s)' % (
+                                    self.subobjects, 
+                                    len(res_data.getSubObjects()), 
+                                    self.transform.name(), 
+                                    self.input))
 
     def testSame(self):
         print >>sys.stdout, '\n\t\t%s' % (self.input)
@@ -57,6 +66,10 @@ class TransformTest( TestCase ):
 
     def __repr__(self):
         return self.transform.name()
+    
+    def subobjects(self):
+        tmpdir = os.path.join(self.output,'Pictures')
+        
 
 TRANSFORMS_TESTINFO = (
     # XXX: This transformations will give slightly different results
@@ -92,7 +105,7 @@ TRANSFORMS_TESTINFO = (
      "test_calc.sxc", "test_calc.html", None, 0
      ),
     ('Products.PortalTransforms.transforms.ooo_to_html',
-     "test_impress.sxi", "test_impress.html", None, 0
+     "test_impress.sxi", "test_impress.html", None, 2
      ),
     ('Products.PortalTransforms.transforms.opendocument_to_html',
      "test_opendocument_writer.odt", "test_opendocument_writer.odt.html",
@@ -170,12 +183,12 @@ initialise('Products.PortalTransforms.transforms.python', normalize_html, "*.py"
 
 # FIXME missing tests for image_to_html, st
 
-# FIXME some tests do not pass - exclude them
 TR_NAMES = None
+
+# Some tests do not pass - exclude them
 EXCLUDE_TESTS = ['tidy_html',
                  'word_to_html',
                  'xls_to_html',
-                 'ooo_to_html',
                  'rest_to_html',
                  'opendocument_to_html',
                 ]
