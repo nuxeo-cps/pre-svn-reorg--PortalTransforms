@@ -75,11 +75,14 @@ $Id$
  <xsl:key name="listTypes" match="text:list-style" use="@style:name" />
  
 
-<xsl:template match="/*"> 
+<xsl:template match="/*">
 
  <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
+ <!-- 
+ FIXME xsltproc bug on testing machine mixes tags : tests fail 
  <title><xsl:value-of select="$title"></xsl:value-of></title>
+  -->
  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <xsl:apply-templates select="office:automatic-styles"/>
  </head>
@@ -103,7 +106,16 @@ $Id$
          This section of the transformation handles styles in the
          content.xml file
  -->
- <xsl:template match="office:automatic-styles">
+ 
+<!-- include images - the HTML file need to access the directory -->
+<!-- target directory as argument and substitued ? -->
+<!--
+<xsl:template match="draw:image">
+    <img src="{@xlink:href}"/><br/>
+</xsl:template>
+-->
+
+<xsl:template match="office:automatic-styles">
          <style type="text/css">
          <xsl:apply-templates/>
          </style>
