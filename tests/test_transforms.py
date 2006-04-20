@@ -66,9 +66,6 @@ class TransformTest( TestCase ):
 
     def __repr__(self):
         return self.transform.name()
-    
-    def subobjects(self):
-        tmpdir = os.path.join(self.output,'Pictures')
         
 
 TRANSFORMS_TESTINFO = (
