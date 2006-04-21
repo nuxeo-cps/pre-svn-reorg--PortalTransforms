@@ -108,12 +108,9 @@ $Id$
  -->
  
 <!-- include images - the HTML file need to access the directory -->
-<!-- target directory as argument and substitued ? -->
-<!--
-<xsl:template match="draw:image">
-    <img src="{@xlink:href}"/><br/>
+<xsl:template match="draw:image"> 
+     <img src="{substring-after(@xlink:href, 'Pictures/')}"/><br/>
 </xsl:template>
--->
 
 <xsl:template match="office:automatic-styles">
          <style type="text/css">
