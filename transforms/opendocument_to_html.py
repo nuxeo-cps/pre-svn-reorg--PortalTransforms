@@ -13,7 +13,17 @@ from Products.PortalTransforms.libtransforms.commandtransform \
 from zLOG import LOG, DEBUG, WARNING
 
 XSL_STYLESHEET_TRANSFORM = os.path.join(
-  os.getcwd(), os.path.dirname(__file__), 'od2ml', 'document2xhtml.xsl')
+                               os.getcwd(), 
+                               os.path.dirname(__file__), 
+                               'od2ml', 
+                               'document2xhtml.xsl')
+                               
+STYLE_SHEET_NAME = 'preview_html.css'
+XSL_STYLESHEET_CSS = os.path.join(
+                               os.getcwd(),
+                               os.path.dirname(__file__), 
+                               'od2ml',
+                               STYLE_SHEET_NAME )
 
 class opendocument_to_html(commandtransform):
     __implements__ = itransform
@@ -43,6 +53,9 @@ class opendocument_to_html(commandtransform):
                 objects = {}
                 if images:
                     self.fixImages(path, images, objects)
+                # add the css 
+                objects[STYLE_SHEET_NAME] = open(XSL_STYLESHEET_CSS, 'rb').read()
+
 
         self.cleanDir(tmpdir)
         cache.setData(html)

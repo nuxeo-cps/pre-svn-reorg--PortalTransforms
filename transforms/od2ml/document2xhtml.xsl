@@ -112,6 +112,16 @@ $Id$
      <img src="{substring-after(@xlink:href, 'Pictures/')}"/><br/>
 </xsl:template>
 
+<!-- a frame around slides -->
+<xsl:template match="draw:page">
+        <!-- CPS: add tabs on displyaing each sheet -->
+        <div class="preview_html_tab">
+        <xsl:apply-templates/>
+    </div>
+    <br/>
+</xsl:template>
+
+
 <xsl:template match="office:automatic-styles">
          <style type="text/css">
          <xsl:apply-templates/>
@@ -370,6 +380,8 @@ $Id$
      </xsl:template>
      
      <xsl:template match="table:table">
+        <!-- CPS: add tabs on displyaing each sheet -->
+        <div class="preview_html_tab">
              <table class="{@table:style-name}">
                      <colgroup>
                              <xsl:apply-templates select="table:table-column"/>
@@ -378,12 +390,15 @@ $Id$
                              <thead>
                              <xsl:apply-templates
                                      select="table:table-header-rows/table:table-row"/>
-                                     </thead>
+                             </thead>
                      </xsl:if>
                      <tbody>
                      <xsl:apply-templates select="table:table-row"/>
                      </tbody>
              </table>
+        </div>
+        <br/>
+
      </xsl:template>
      
      <xsl:template match="table:table-column">
