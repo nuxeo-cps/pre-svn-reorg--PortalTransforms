@@ -87,7 +87,7 @@ $Id$
     <xsl:apply-templates select="office:automatic-styles"/>
  </head>
  <body>
-    <!-- each document type has a different body content name
+    <!-- CPS: each document type has a different body content name
          each apply-templates is dedicated to an OpenDocument file type
          (templates are also supported)
          office:text : writer file
@@ -107,12 +107,12 @@ $Id$
          content.xml file
  -->
  
-<!-- include images - the HTML file need to access the directory -->
+<!-- CPS: include images - the HTML file need to access the directory -->
 <xsl:template match="draw:image"> 
-     <img src="{substring-after(@xlink:href, 'Pictures/')}"/><br/>
+     <div><img src="{substring-after(@xlink:href, 'Pictures/')}"/><br/></div>
 </xsl:template>
 
-<!-- a frame around slides -->
+<!-- CPS: a frame around slides -->
 <xsl:template match="draw:page">
         <!-- CPS: add tabs on displyaing each sheet -->
         <div class="preview_html_tab">
@@ -334,51 +334,185 @@ $Id$
              </xsl:element>
      </xsl:template>
      
-     <!--
-             When processing a list, you have to look at the parent style
-             *and* level of nesting
-     -->
-     <xsl:template match="text:list">
-             <xsl:variable name="level" select="count(ancestor::text:list)+1"/>
-     
-             <!-- the list class is the @text:style-name of the outermost
-                     <text:list> element -->
-             <xsl:variable name="listClass">
-                     <xsl:choose>
-                             <xsl:when test="$level=1">
-                                     <xsl:value-of select="@text:style-name"/>
-                             </xsl:when>
-                             <xsl:otherwise>
-                                     <xsl:value-of select="
-                                             ancestor::text:list[last()]/@text:style-name"/>
-                             </xsl:otherwise>
-                     </xsl:choose>
-             </xsl:variable>
-     
-             <!-- Now select the <text:list-level-style-foo> element at this
-                     level of nesting for this list -->
-             <xsl:variable name="node" select="key('listTypes',
-                     $listClass)/*[@text:level='$level']"/>
-     
-             <!-- emit appropriate list type -->
-             <xsl:choose>
-                     <xsl:when test="local-name($node)='list-level-style-number'">
-                             <ol class="{concat($listClass,'_',$level)}">
-                                     <xsl:apply-templates/>
-                             </ol>
-                     </xsl:when>
-                     <xsl:otherwise>
-                             <ul class="{concat($listClass,'_',$level)}">
-                                     <xsl:apply-templates/>
-                             </ul>
-                     </xsl:otherwise>
-             </xsl:choose>
-     </xsl:template>
-     
-     <xsl:template match="text:list-item">
-             <li><xsl:apply-templates/></li>
-     </xsl:template>
-     
+
+<!-- CPS: Impress lists are not defined as classical ones 
+Special handling is needed 
+ impress closes all list-item each time, lmoosing nesting hierarchy
+ look at the next top list-item : count its depth -->
+
+<xsl:template name = "listImpress">
+    <xsl:param name="recurse">no</xsl:param>
+    <xsl:param name="previousLevel">0</xsl:param>
+
+    <xsl:variable name="startLevel">
+        <xsl:for-each select="ancestor::draw:text-box">
+            <xsl:value-of select="count(ancestor::*)+1"/>
+        </xsl:for-each>
+    </xsl:variable>
+    <xsl:variable name="currentLevel">
+        <xsl:for-each select="*//text:p">
+            <xsl:value-of select="count(ancestor::*)"/>
+        </xsl:for-each>
+    </xsl:variable>
+    <xsl:variable name="nextLevel">
+        <xsl:choose>
+                <xsl:when test="following-sibling::*[1]//text:p">
+                    <xsl:for-each select="following-sibling::*[1]//text:p">
+                        <xsl:value-of select="count(ancestor::*)"/>
+                    </xsl:for-each>
+                </xsl:when>
+        </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="diffLevel">
+        <xsl:value-of select="($nextLevel - $currentLevel) div 2"/>
+    </xsl:variable>
+    <xsl:variable name="diffToRoot">
+        <xsl:value-of select="($currentLevel - $startLevel) div 2"/>
+    </xsl:variable>
+
+    <xsl:if test="($recurse='no' and $diffToRoot = 1) or $recurse='yes'">
+
+        <xsl:choose>
+
+                <!-- the current level is equal, to the previous one - do not open any <ul> -->
+                <xsl:when test="$currentLevel = $previousLevel">
+                    <xsl:apply-templates/>
+                    <xsl:apply-templates select="following-sibling::*[1]">
+                        <xsl:with-param name="recurse">yes</xsl:with-param>
+                        <xsl:with-param name="previousLevel"><xsl:value-of select="$currentLevel"/></xsl:with-param>
+                    </xsl:apply-templates>
+                </xsl:when>
+
+                <!-- the next level is deeper -->
+                <xsl:when test="number($diffLevel) >= 0">
+                <ul>
+                    <xsl:apply-templates/>
+                    <xsl:apply-templates select="following-sibling::*[1]">
+                        <xsl:with-param name="recurse">yes</xsl:with-param>
+                        <xsl:with-param name="previousLevel"><xsl:value-of select="$currentLevel"/></xsl:with-param>
+                    </xsl:apply-templates>
+                
+                </ul> <!-- but now closes it after recursive treatment -->
+                </xsl:when>
+
+                <!-- the next level is lower or last node -->
+                <xsl:when test="(number($diffLevel) &lt; 0) or $diffLevel = 'NaN'">
+                    <ul>
+                        <xsl:apply-templates/>
+                    </ul>
+                </xsl:when>
+                <!-- the next level is lower 
+
+                <xsl:when test="$diffLevel = 'NaN'">
+                    <ul>
+                        <xsl:apply-templates/>
+                    </ul>
+                </xsl:when>-->
+
+        </xsl:choose>
+
+
+
+
+    </xsl:if>
+
+</xsl:template>
+
+<!-- Impress dedicated item treatment  -->
+<xsl:template name="itemImpress">
+      <li><xsl:value-of select="child::*"/></li>
+</xsl:template>
+
+<!--
+        When processing a list, you have to look at the parent style
+        *and* level of nesting
+
+<xsl:template match="text:list" name="listNotImpress">
+-->
+<xsl:template name="listNotImpress">
+
+    <xsl:if test="count(ancestor::*//office:presentation) = 0">
+
+        <xsl:variable name="level" select="count(ancestor::text:list)+1"/>
+
+        <!-- the list class is the @text:style-name of the outermost
+                <text:list> element -->
+        <xsl:variable name="listClass">
+                <xsl:choose>
+                        <xsl:when test="$level=1">
+                                <xsl:value-of select="@text:style-name"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                                <xsl:value-of select="
+                                        ancestor::text:list[last()]/@text:style-name"/>
+                        </xsl:otherwise>
+                </xsl:choose>
+        </xsl:variable>
+
+        <!-- Now select the <text:list-level-style-foo> element at this
+                level of nesting for this list -->
+        <xsl:variable name="node" select="key('listTypes',
+                $listClass)/*[@text:level='$level']"/>
+
+        <!-- emit appropriate list type -->
+        <xsl:choose>
+                <xsl:when test="local-name($node)='list-level-style-number'">
+                        <ol class="{concat($listClass,'_',$level)}">
+                                <xsl:apply-templates/>
+                        </ol>
+                </xsl:when>
+                <xsl:otherwise>
+                        <ul class="{concat($listClass,'_',$level)}">
+                                <xsl:apply-templates/>
+                        </ul>
+                </xsl:otherwise>
+        </xsl:choose>
+
+</xsl:if>
+
+</xsl:template>
+
+
+<xsl:template match="text:list">
+        <xsl:param name="recurse">no</xsl:param>
+        <xsl:param name="previousLevel">0</xsl:param>
+
+        <xsl:choose>
+            <!-- non impress lists -->
+            <xsl:when test="count(ancestor::*//office:presentation) = 0">
+                <xsl:call-template name="listNotImpress"/>
+            </xsl:when>
+            <!-- impress lists -->
+            <xsl:when test="count(ancestor::*//office:presentation) = 1">
+                <xsl:call-template name="listImpress">
+                    <xsl:with-param name="recurse"><xsl:value-of select="$recurse"/></xsl:with-param>
+                    <xsl:with-param name="previousLevel"><xsl:value-of select="$previousLevel"/></xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+        </xsl:choose>
+
+</xsl:template>
+
+<xsl:template match="text:list-item">
+
+    <xsl:choose>
+        <!-- non impress lists -->
+        <xsl:when test="count(ancestor::*//office:presentation) = 0">
+            <li><xsl:apply-templates/></li>
+        </xsl:when>
+        <!-- impress lists -->
+        <xsl:when test="count(ancestor::*//office:presentation) = 1">
+            <xsl:call-template name="itemImpress"/>
+        </xsl:when>
+    </xsl:choose>
+
+</xsl:template>
+
+
+
+
+
+
      <xsl:template match="table:table">
         <!-- CPS: add tabs on displyaing each sheet -->
         <div class="preview_html_tab">
