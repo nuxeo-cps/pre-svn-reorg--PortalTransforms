@@ -18,12 +18,12 @@ XSL_STYLESHEET_TRANSFORM = os.path.join(
                                'od2ml', 
                                'document2xhtml.xsl')
                                
-STYLE_SHEET_NAME = 'preview_html.css'
-XSL_STYLESHEET_CSS = os.path.join(
+#style sheet for preview : content will be append as subobjects
+XSL_STYLESHEET_DIRECTORY = os.path.join(
                                os.getcwd(),
                                os.path.dirname(__file__), 
                                'od2ml',
-                               STYLE_SHEET_NAME )
+                               'preview_css' )
 
 class opendocument_to_html(commandtransform):
     __implements__ = itransform
@@ -46,16 +46,25 @@ class opendocument_to_html(commandtransform):
         tmpdir, fullname = self.initialize_tmpdir(data, **kwargs)
         html = self.invokeCommand(tmpdir, fullname)
 
-        subObjectsPaths = [tmpdir, os.path.join(tmpdir, 'Pictures')]
+        subObjectsPaths = [tmpdir,
+                           os.path.join(tmpdir, 'Pictures'), 
+                           XSL_STYLESHEET_DIRECTORY]
+                           
+        objects = {}           
         for subObjectsPath in subObjectsPaths:
             if os.path.exists(subObjectsPath):
                 path, images = self.subObjects(subObjectsPath)
-                objects = {}
                 if images:
                     self.fixImages(path, images, objects)
-                # add the css 
-                objects[STYLE_SHEET_NAME] = open(XSL_STYLESHEET_CSS, 'rb').read()
-
+                    
+        # add the css files
+        if os.path.exists(XSL_STYLESHEET_DIRECTORY):
+            for css_item in os.listdir(XSL_STYLESHEET_DIRECTORY):
+                if css_item.endswith(".css"):
+                    objects[css_item] = open(
+                        os.path.join(XSL_STYLESHEET_DIRECTORY,css_item),
+                        'rb'
+                        ).read()
 
         self.cleanDir(tmpdir)
         cache.setData(html)

@@ -106,27 +106,27 @@ TRANSFORMS_TESTINFO = (
      ),
     ('Products.PortalTransforms.transforms.opendocument_to_html',
      "test_opendocument_writer.odt", "test_opendocument_writer.odt.html",
-      None, 1
+      None, 2
      ),
     ('Products.PortalTransforms.transforms.opendocument_to_html',
      "test_opendocument_writer.ott", "test_opendocument_writer.ott.html",
-      None, 1
+      None, 2
      ),
     ('Products.PortalTransforms.transforms.opendocument_to_html',
      "test_opendocument_calc.ods", "test_opendocument_calc.ods.html",
-      None, 1
+      None, 2
      ),
     ('Products.PortalTransforms.transforms.opendocument_to_html',
      "test_opendocument_calc.ots", "test_opendocument_calc.ots.html",
-      None, 1
+      None, 2
      ),
     ('Products.PortalTransforms.transforms.opendocument_to_html',
      "test_opendocument_impress.odp", "test_opendocument_impress.odp.html",
-      None, 1
+      None, 2
      ),
     ('Products.PortalTransforms.transforms.opendocument_to_html',
      "test_opendocument_impress.otp", "test_opendocument_impress.otp.html",
-      None, 1
+      None, 2
      ),
     )
 
