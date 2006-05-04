@@ -363,16 +363,22 @@ $Id$
 
         <!-- Now select the <text:list-level-style-foo> element at this
                 level of nesting for this list -->
-        <xsl:variable name="node" select="key('listTypes',
-                $listClass)/*[@text:level='$level']"/>
+        <xsl:variable name="bulletType">
+                <xsl:value-of select="local-name(ancestor::*
+                                                //text:list-style[@style:name=$listClass]
+                                                    /*[@text:level=$level])"/>
+            </xsl:variable>
 
         <xsl:if test="$positionInList = 1 or (count(ancestor::*//office:presentation) = 0)">
 
         <!-- emit appropriate list type -->
         <xsl:choose>
-                <xsl:when test="local-name($node)='list-level-style-number'">
+                <xsl:when test="$bulletType='list-level-style-number'">
                         <ol class="{concat($listClass,'_',$level)}">
                                 <xsl:apply-templates/>
+                                <xsl:for-each select="following-sibling::*">
+                                        <xsl:apply-templates/>
+                                </xsl:for-each>
                         </ol>
                 </xsl:when>
                 <xsl:otherwise>
