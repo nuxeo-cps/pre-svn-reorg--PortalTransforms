@@ -25,3 +25,8 @@
   background-repeat:no-repeat;
   background-position:top left}
 }
+
+p.preview_html_tabtitle {
+  font-weight:bold;
+  text-align:right;
+}

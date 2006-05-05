@@ -114,6 +114,9 @@ $Id$
 
 <!-- CPS: a frame around slides -->
 <xsl:template match="draw:page">
+        <p class="preview_html_tabtitle">
+            <xsl:value-of select="@draw:name"/>
+        </p>
         <!-- CPS: add tabs on displyaing each sheet -->
         <div class="preview_html_tab">
         <xsl:apply-templates/>
@@ -410,13 +413,26 @@ $Id$
 </xsl:template>
 
 
-
-
-
-
      <xsl:template match="table:table">
         <!-- CPS: add tabs on displyaing each sheet -->
-        <div class="preview_html_tab">
+        <xsl:choose>
+            <xsl:when test="name(..)='office:spreadsheet'">
+                <p class="preview_html_tabtitle">
+                    <xsl:value-of select="@table:name"/>
+                </p>
+                <div class="preview_html_tab">
+                    <xsl:call-template name="applyTable"/>
+                </div>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="applyTable"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        <br/>
+
+     </xsl:template>
+     
+    <xsl:template name="applyTable">
              <table class="{@table:style-name}">
                      <colgroup>
                              <xsl:apply-templates select="table:table-column"/>
@@ -431,11 +447,9 @@ $Id$
                      <xsl:apply-templates select="table:table-row"/>
                      </tbody>
              </table>
-        </div>
         <br/>
+    </xsl:template>
 
-     </xsl:template>
-     
      <xsl:template match="table:table-column">
      <col>
              <xsl:if test="@table:number-columns-repeated">
