@@ -60,7 +60,7 @@ $Id$
                                           fo svg smil ooo ooow oooc int">
  
  <xsl:output method               = "xml"
-             encoding             = "iso-8859-15"
+             encoding             = "utf-8"
              media-type           = "application/xhtml+xml"
              indent               = "no"
              doctype-public       = "-//W3C//DTD XHTML 1.0 Transitional//EN"
